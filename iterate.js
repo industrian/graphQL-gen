@@ -18,7 +18,7 @@ function loadOASYaml(filePath) {
 // Step 2: Function to iterate through OAS content
 function iterateOAS(oasDocument) {
 
-    
+
     try {
         if (fs.existsSync("graphql-files")) {
             fs.rmSync("graphql-files", { recursive: true, force: true });
@@ -41,19 +41,19 @@ function iterateOAS(oasDocument) {
                 // Accessing operation details (e.g., summary, responses)
                 const operation = methods[method]
 
-                if (operation.operationId){
+                if (operation.operationId) {
 
-                // Do stuff here
+                    // Do stuff here
 
-                CreateFile(operation.operationId);
+                    CreateFile(operation.operationId);
 
-                console.log(processedId)
+                    //console.log(processedId)
 
                 }
                 //console.log(`    Summary: ${operation.summary || 'No summary'}`);
                 //console.log(`    Responses:`);
                 for (const statusCode in operation.responses) {
-                   // console.log(`      Status Code: ${statusCode}`);
+                    // console.log(`      Status Code: ${statusCode}`);
                 }
             }
         }
@@ -63,7 +63,7 @@ function iterateOAS(oasDocument) {
     if (oasDocument.components && oasDocument.components.schemas) {
         //console.log('\nSchemas:');
         for (const schemaName in oasDocument.components.schemas) {
-        //    console.log(`Schema: ${schemaName}`);
+            //    console.log(`Schema: ${schemaName}`);
         }
     }
 }
@@ -75,21 +75,58 @@ loadOASYaml('../commercetools-api-reference/oas/api/openapi.yaml');
  * 
  * @param {string} operationId 
  */
-function CreateFile(operationId){
+function CreateFile(operationId) {
 
-    /*try {
-        if (!fs.existsSync(basePath)) {
-            fs.mkdirSync(basePath);
+    const processedIds = operationId.split("ByProjectKey");
+
+    let graphqlQuery = processedIds[1].endsWith("Post") ? "mutation {" : "query {";
+
+
+
+    // Do not create a query for Checking Project Exists
+    if (processedIds[1] != "Head") {
+
+        // Special case for getting a Project
+        if (processedIds[1] === "Get") {
+            graphqlQuery = `query{
+  project{
+    version
+    key
+    name
+    countries
+    currencies
+    #...
+  }
+`;
         }
-    } catch (err) {
-        console.error(err);
-    }*/
 
-    
-    const processedId = operationId.split("ByProjectKey")[1];
+        // Special case for updating a Project
+        if (processedIds[1] === "Post") {
+            graphqlQuery = `mutation{
+  updateProject(
+    version:1
+    actions:[
+      {
+        changeCurrencies:{
+          currencies:["EUR","USD"]
+        }
+      }
+    ]
+  ){
+    version
+    key
+    name
+    countries
+    currencies
+    #...
+  }
+`;
+        }
 
-    fs.writeFileSync("graphql-files/" + operationId+".graphql",processedId)
+        graphqlQuery += "}";
 
-    
+        fs.writeFileSync("graphql-files/" + operationId + ".graphql", graphqlQuery)
+
+    }
 }
 

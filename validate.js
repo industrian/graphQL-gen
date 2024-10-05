@@ -14,6 +14,8 @@ const graphqlFolder = path.join(path.resolve(), 'graphql-files');
 
 // 4. Function to load and validate all GraphQL files in a folder
 function validateGraphQLFiles(folderPath) {
+    let totalNumberOfFiles = 0;
+    let invalidFiles = 0;
     // Get all files in the folder
     const files = fs.readdirSync(folderPath);
 
@@ -24,6 +26,7 @@ function validateGraphQLFiles(folderPath) {
     graphqlFiles.forEach(file => {
         const filePath = path.join(folderPath, file);
         const query = fs.readFileSync(filePath, 'utf-8');
+        totalNumberOfFiles++;
         try {
             // Parse the GraphQL query
             const ast = parse(query);
@@ -34,13 +37,17 @@ function validateGraphQLFiles(folderPath) {
             if (errors.length > 0) {
                 console.error(`Validation errors in ${file}:`);
                 errors.forEach(err => console.error(err.message));
+                invalidFiles++;
             } else {
                 console.log(`${file} is valid!`);
             }
         } catch (err) {
             console.error(`Error parsing ${file}:`, err.message);
+            invalidFiles++;
         }
     });
+
+    console.log(`${invalidFiles}/${totalNumberOfFiles} were invalid.`)
 }
 
 
