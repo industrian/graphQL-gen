@@ -17,6 +17,7 @@ const singularEndpoint = {
     "DiscountCodes": "DiscountCode",
     "Extensions": "Extension",
     "Inventory": "InventoryEntry",
+    "Login": "customerSignUp",
     "Messages": "Message",
     "Orders": "Order",
     "OrdersEdits": "OrderEdit",
@@ -58,6 +59,7 @@ const exampleFileEndpoint = {
     "DiscountCodes": "discount-code",
     "Extensions": "extension",
     "Inventory": "inventory",
+    "Login": "login",
     "Messages": "message",
     "Orders": "order",
     "OrdersEdits": "order-edits",
@@ -217,35 +219,20 @@ function CreateFile(operationId) {
             if (processedIds[1].includes("InStore")) {
                 // TODO: InStore stuff
 
-                let inStoreProcessedIds = processedIds[1].split("InStoreKeyByStoreKey")
-                console.log(inStoreProcessedIds)
-
-                if (inStoreProcessedIds[1].startsWith("Me")) {
-                    // TODO: Me endpoint stuff
-                }
-                else {
-                    // Special case for posting, deleting
-                    if (inStoreProcessedIds[1].endsWith("Post")) {
-
-                    }
-                    else if (inStoreProcessedIds[1].endsWith("Delete")) {
-
-                    }
-                    else {
-                        graphqlQuery += `query{
-                        inStore(key:"{key}"){
-                        ${processStuff(inStoreProcessedIds, true)}
-                        }
-                        }`
-                    }
-                }
+                graphqlQuery += processInStoreStuff(processedIds)
             }
             else {
-                if (processedIds[1].startsWith("Me")) {
-                    // TODO: Me endpoint stuff
+                if (processedIds[1].startsWith("Me") && !processedIds[1].startsWith("Message")) {
+
+                    graphqlQuery = `query {`
+                    graphqlQuery += processMeEndpoints(processedIds)
+                    graphqlQuery += `}`
+
+
+
                 }
                 else {
-                    graphqlQuery += processStuff(processedIds)
+                    graphqlQuery += processStuff(processedIds, false)
                 }
             }
         }
@@ -255,12 +242,66 @@ function CreateFile(operationId) {
     }
 }
 
-function processStuff(processedIds, isInStore) {
+function processMeEndpoints(processedIds, isInStore) {
+
+    let meProcessedIds = processedIds[1].slice(2)
+    console.log("ME ENDPOINT: " + meProcessedIds)
     let graphqlQuery = "";
-    const queryText = isInStore ? "" : "query {";
-    let addStoreKey = isInStore ? '\nstoreKey:"{storeKey}"' : ""
+
+    graphqlQuery += ` me{
+      ${processStuff(["", meProcessedIds], isInStore, true)}
+    }`
+
+    return graphqlQuery;
+}
+
+function processInStoreStuff(processedIds) {
+    let inStoreProcessedIds = processedIds[1].split("InStoreKeyByStoreKey")
+    let graphqlQuery = "";
+    console.log(inStoreProcessedIds)
+
+    if (inStoreProcessedIds[1].startsWith("Me")) {
+    // TODO: Me endpoint stuff
+        graphqlQuery += processMeEndpoints(inStoreProcessedIds, true)
+    }
+    else {
+        // Special case for posting, deleting
+        if (inStoreProcessedIds[1].endsWith("Post")) {
+
+        }
+        else if (inStoreProcessedIds[1].endsWith("Delete")) {
+
+        }
+        else {
+            graphqlQuery += `query{
+            inStore(key:"{key}"){
+            ${processStuff(inStoreProcessedIds, true)}
+            }
+            }`
+        }
+    }
+
+    return graphqlQuery;
+}
+
+function processStuff(processedIds, isInStore, isMeEndpoint) {
+    let graphqlQuery = "";
+    let queryText = isInStore === true ? "" : "query {";
+    if (isMeEndpoint === true) { queryText = ""; }
+    let addStoreKey = isInStore === true ? '\nstoreKey:"{storeKey}"' : ""
+
+    if (isMeEndpoint) { queryText = ""; }
     console.log("QUERYTEXT: " + queryText)
+
+    let displayClosingBracket = true;
+    if (isInStore === true) { displayClosingBracket = false; }
+    if (isMeEndpoint === true) { displayClosingBracket = false; }
+    //const meEndpointText = isMeEndpoint === true ? "" : "\nme {";
+
+    //console.log("QUERYTEXT: " + queryText)
     let keyOrID = processedIds[1].includes("ByID") ? `id: "{id}"` : `key: "{key}"`;
+
+    const includeVersion = processedIds[1].startsWith("ApiClients") ? false : true;
 
                     // Calling an individual resource
                     if (processedIds[1].includes("KeyByKey") || processedIds[1].includes("ByID")) {
@@ -288,11 +329,11 @@ function processStuff(processedIds, isInStore) {
                             graphqlQuery += `mutation{
                             delete${singularEndpoint[endpointName]}(${addStoreKey}
                                 ${keyOrID}
-                                version: 1                                
+                                ${includeVersion ? "version: 1" : ""}                          
                             )
                             {
                                 id
-                                version
+                                ${includeVersion ? "version" : ""}        
                                 #...
                             }
                         }`;
@@ -307,7 +348,7 @@ function processStuff(processedIds, isInStore) {
                                 ${lowerCaseFirstLetter(endpointName)}( ${addContainerToCustomObject}
                                 where:${processedIds[1].includes("ByID") ? '"id=\\\"{id}\\\""' : '"key=\\\"{key}\\\""'}){
                                     exists`
-                            if (!isInStore) { graphqlQuery += "}" }
+                            if (displayClosingBracket) { graphqlQuery += "}" }
                             graphqlQuery += `}`;
                         }
 
@@ -322,12 +363,13 @@ function processStuff(processedIds, isInStore) {
                                 ${lowerCaseFirstLetter(singularEndpoint[endpointName])}(${addContainerToCustomObject}
                                 ${keyOrID}){
                                     id
-                                    version
+
+                                ${includeVersion ? "version" : ""}     
                                     createdAt
                                     #...
                                     `
 
-                            if (!isInStore) { graphqlQuery += "}" }
+                            if (displayClosingBracket) { graphqlQuery += "}" }
                             graphqlQuery += `}`;
                         }
 
@@ -347,19 +389,22 @@ function processStuff(processedIds, isInStore) {
 
                             let addContainerToCustomObject = endpointName === "customObjects" ? `(container:"{container}")` : ""
 
-                            graphqlQuery += `query${addContainerToCustomObject}{
-                                ${endpointName}{
+                            if (queryText != "") {
+                                graphqlQuery += `query${addContainerToCustomObject}{\n`
+                            }
+
+                            graphqlQuery += `${endpointName}{
                                     offset
                                     count
                                     total
                                     results{
                                     id
-                                    version
+                                    ${includeVersion ? "version" : ""}     
                                     createdAt
                                     #...
                                     }`
 
-                            if (!isInStore) { graphqlQuery += "}" }
+                            if (displayClosingBracket) { graphqlQuery += "}" }
                             graphqlQuery += `}`;
                         }
 
@@ -408,14 +453,17 @@ function processStuff(processedIds, isInStore) {
 
 function getContentOfExampleFile(endpoint, createOrUpdate) {
 
-    let processedFilename = `${endpoint}-${createOrUpdate}`;
+    console.log("Endpoint: " + endpoint)
 
-    if (endpoint === "cart-replicate") { processedFilename = endpoint }
-    if (endpoint === "order-import") { processedFilename = endpoint }
+    let processedFilename = `${endpoint}-${createOrUpdate}.example`;
+
+    if (endpoint === "cart-replicate") { processedFilename = endpoint + ".example" }
+    if (endpoint === "order-import") { processedFilename = endpoint + ".example" }
+    if (endpoint === "login") { processedFilename = "Customer/CustomerSignIn" }
 
 
     try {
-        const fileContents = fs.readFileSync(`../commercetools-api-reference/api-specs/api/examples/${processedFilename}.example.json`, 'utf8');
+        const fileContents = fs.readFileSync(`../commercetools-api-reference/api-specs/api/examples/${processedFilename}.json`, 'utf8');
         //console.log(fileContents);
         return fileContents;
     } catch (e) {
@@ -424,7 +472,7 @@ function getContentOfExampleFile(endpoint, createOrUpdate) {
     }
 }
 
-function jsonToGraphQLMutation(json, mutationName, updateKeyOrId, isInStore, isAssociate) {
+function jsonToGraphQLMutation(json, mutationName, updateKeyOrId, isInStore, isMeEndpoint, isAssociate) {
 
     let version = 1;
     let addStoreKey = isInStore ? '\nstoreKey:"{storeKey}"' : "";
@@ -516,13 +564,14 @@ function jsonToGraphQLMutation(json, mutationName, updateKeyOrId, isInStore, isA
     }
     else {
 
+
+
         return `mutation {
     ${mutationName}(${addStoreKey}
         draft: {
       ${buildInputFields(json)}
     }) {
-      id
-      version
+      id${mutationName === "createApiClient" ? "" : "\nversion"}
       createdAt
       #...
     }
