@@ -3,6 +3,8 @@ import { buildSchema, parse, validate } from 'graphql';
 import fs from 'fs';
 import path from 'path';
 
+let rerunValidation = false;
+
 // 1. Load the schema SDL from a file
 const schemaSDL = fs.readFileSync(path.join(path.resolve(), '../commercetools-api-reference/api-specs/graphql/schema.sdl'), 'utf-8');
 
@@ -36,7 +38,31 @@ function validateGraphQLFiles(folderPath) {
 
             if (errors.length > 0) {
                 console.error(`Validation errors in ${file}:`);
-                errors.forEach(err => console.error(err.message));
+                errors.forEach(
+                    err => {
+                        console.error(err.message)
+
+                        // Replace enum values
+                        if (err.message.includes("cannot represent non-enum value")) {
+                            console.log("Fixing enum")
+
+                            let field = err.message.match(/Enum "([^"]*)"/)[1];
+                            //console.log(field)
+
+                            let value = err.message.match(/cannot represent non-enum value: "([^"]*)"/)[1];
+                            console.log(value)
+
+                            let updatedQuery = query.replace(`: "${value}"`, `: ${value}`)
+                            console.log(updatedQuery)
+
+                            fs.writeFileSync("graphql-files/" + file, updatedQuery)
+
+                            rerunValidation = true;
+                        }
+                    }
+                );
+
+
                 invalidFiles++;
             } else {
                 // console.log(`${file} is valid!`);
@@ -53,3 +79,9 @@ function validateGraphQLFiles(folderPath) {
 
 // 5. Validate all GraphQL files in the specified folder
 validateGraphQLFiles(graphqlFolder);
+
+if (rerunValidation) {
+    rerunValidation = false;
+    validateGraphQLFiles(graphqlFolder);
+}
+
