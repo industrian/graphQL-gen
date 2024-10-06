@@ -16,7 +16,7 @@ const singularEndpoint = {
     "Customers": "Customer",
     "DiscountCodes": "DiscountCode",
     "Extensions": "Extension",
-    "Inventory": "Inventory",
+    "Inventory": "InventoryEntry",
     "Messages": "Message",
     "Orders": "Order",
     "OrdersEdits": "OrderEdit",
@@ -30,7 +30,7 @@ const singularEndpoint = {
     "QuoteRequests": "QuoteRequest",
     "Quotes": "Quote",
     "Reviews": "Review",
-    "ShippingMethods": "ShippingMethid",
+    "ShippingMethods": "ShippingMethod",
     "ShoppingLists": "ShoppingList",
     "StagedQuotes": "StagedQuote",
     "StandalonePrices": "StandalonePrice",
@@ -41,6 +41,53 @@ const singularEndpoint = {
     "TypeDefinitions": "TypeDefinition",
     "Zones": "Zone"
 };
+
+const exampleFileEndpoint = {
+    "ApiClients": "api-client",
+    "AssociateRoles": "associate-role",
+    "AttributeGroups": "attribute-group",
+    "BusinessUnits": "business-unit",
+    "CartDiscounts": "cart-discount",
+    "Carts": "cart",
+    "CartsReplicate": "cart-replicate",
+    "Categories": "category",
+    "Channels": "channel",
+    "CustomObjects": "custom-object",
+    "CustomerGroups": "customer-group",
+    "Customers": "customer",
+    "DiscountCodes": "discount-code",
+    "Extensions": "extension",
+    "Inventory": "inventory",
+    "Messages": "message",
+    "Orders": "order",
+    "OrdersEdits": "order-edits",
+    "OrdersImport": "order-import",
+    "Payments": "payment",
+    "ProductDiscounts": "product-discount",
+    "ProductProjections": "product-projection",
+    "ProductSelections": "product-selection",
+    "ProductTailoringList": "product-tailoring",
+    "ProductTailoring": "product-tailoring",
+    "ProductTypes": "product-type",
+    "Products": "product",
+    "QuoteRequests": "quote-request",
+    "Quotes": "quote",
+    "Reviews": "review",
+    "ShippingMethods": "shipping-method",
+    "ShoppingLists": "shopping-list",
+    "StagedQuotes": "staged-quote",
+    "StandalonePrices": "standalone-price",
+    "States": "state",
+    "Stores": "store",
+    "Subscriptions": "subscription",
+    "TaxCategories": "tax-category",
+    "TypeDefinitions": "type",
+    "Zones": "zone"
+};
+
+function lowerCaseFirstLetter(stringValue) {
+    return stringValue.charAt(0).toLowerCase() + stringValue.slice(1);
+}
 
 // Step 1: Load the OAS YAML file
 function loadOASYaml(filePath) {
@@ -194,7 +241,9 @@ function CreateFile(operationId) {
 
                         if (endpointAndMethod[1] === "Post") {
 
-                            graphqlQuery += `mutation{
+                            graphqlQuery += `${jsonToGraphQLMutation(JSON.parse(getContentOfExampleFile(exampleFileEndpoint[endpointName], "update")), `update${singularEndpoint[endpointName]}`, keyOrID)}`
+
+                            /*graphqlQuery += `mutation{
                             update${singularEndpoint[endpointName]}(
                                 ${keyOrID}
                                 version: 1
@@ -211,7 +260,7 @@ function CreateFile(operationId) {
                                 version
                                 name
                             }
-                        }`;
+                        }`;*/
                         }
 
                         if (endpointAndMethod[1] === "Delete") {
@@ -278,7 +327,6 @@ function CreateFile(operationId) {
 
                         if (processedIds[1].split("Head").length === 2) {
 
-
                             endpointName = lowerCaseFirstLetter(processedIds[1].split("Head")[0]);
                             //console.log(endpointName)
                             if (endpointName === "productTailoring") { endpointName = "productTailoringList"; }
@@ -291,26 +339,147 @@ function CreateFile(operationId) {
                             
                         }`;
                         }
+
+
+                        if (processedIds[1].split("Post").length === 2) {
+
+                            //console.log(processedIds[1])
+                            endpointName = processedIds[1].split("Post")[0];
+                            if (!["", "Graphql", "LoginPost", "OrdersOrderNumberByOrderNumber", "ProductProjectionsSearch", "ProductsSearch"].includes(endpointName)) {
+
+                                if (endpointName === "Types") { endpointName = "TypeDefinitions"; }
+
+                                console.log(endpointName)
+
+
+                                //console.log(processedIds[1].split("Post")[0])
+                                //console.log(endpointName)
+
+                                graphqlQuery += `${jsonToGraphQLMutation(JSON.parse(getContentOfExampleFile(exampleFileEndpoint[endpointName], "create")), `create${singularEndpoint[endpointName]}`)}`
+                            }
+                        }
                     }
-
-
-                    // Normal endpoints
-
-
-                    // By Key
                 }
             }
         }
-
-        //graphqlQuery += "}";
 
         fs.writeFileSync("graphql-files/" + operationId + ".graphql", graphqlQuery)
 
     }
 }
 
+function getContentOfExampleFile(endpoint, createOrUpdate) {
 
-function lowerCaseFirstLetter(stringValue) {
-    return stringValue.charAt(0).toLowerCase() + stringValue.slice(1);
+    let processedFilename = `${endpoint}-${createOrUpdate}`;
+
+    if (endpoint === "cart-replicate") { processedFilename = endpoint }
+    if (endpoint === "order-import") { processedFilename = endpoint }
+
+
+    try {
+        const fileContents = fs.readFileSync(`../commercetools-api-reference/api-specs/api/examples/${processedFilename}.example.json`, 'utf8');
+        //console.log(fileContents);
+        return fileContents;
+    } catch (e) {
+        console.error(e);
+        return "{}";
+    }
 }
 
+function jsonToGraphQLMutation(json, mutationName, updateKeyOrId) {
+
+    let version = 1;
+    // Helper function to recursively build the mutation input
+
+    const buildInputFields = (obj) => {
+        let fields = Object.keys(obj).map(key => {
+            let value = obj[key];
+
+            // Handle nested objects recursively
+            if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+
+                // Special case for localized strings
+                if (value["en"]) {
+                    return `${key}: [{ locale:"en" value: "${value["en"]}" } ]`
+                }
+                else {
+                    return `${key}: {\n ${buildInputFields(value)} \n}`;
+                }
+            } else if (Array.isArray(value)) {
+                // Check if the array contains objects or primitives
+                const arrayValues = value.map(item => {
+                    if (typeof item === 'object' && item !== null) {
+                        // Recursively process objects in the array
+                        return `{\n ${buildInputFields(item)} \n}`;
+                    } else if (typeof item === 'string') {
+                        // Wrap strings in quotes
+                        return `"${item}"`;
+                    } else {
+                        // Numbers, booleans, etc., don't need quotes
+                        return item;
+                    }
+                });
+                return `${key}: [\n${arrayValues.join(', ')}\n]`;
+            } else if (typeof value === 'string') {
+                if (updateKeyOrId && key === "action") {
+                    return value + ": {"
+                }
+                return `${key}: "${value}"`;  // Wrap strings in quotes
+            } else {
+                if (updateKeyOrId && key === "version") {
+                    version = value;
+                    return ""
+                }
+                else {
+                    // Numbers, booleans, etc., don't need quotes
+                    return `${key}: ${value}`;    // Leave numbers, booleans, etc., as is
+                }
+
+            }
+
+        });
+
+        fields = fields.filter(str => str !== "");
+        return fields.join('\n');
+    };
+
+
+    // Create mutation string with input fields and return fields
+
+    if (updateKeyOrId) {
+
+        let values = buildInputFields(json);
+        const lastIndex = values.lastIndexOf("]");
+        if (lastIndex !== -1) {
+            // Replace the last occurrence of "]" with "}]"
+            values = values.slice(0, lastIndex) + "}]" + values.slice(lastIndex + 1);
+        }
+
+        return `mutation {
+            ${mutationName}(
+                version: ${version}
+                ${updateKeyOrId}                
+                ${values}                
+            ){
+                id
+                version
+                lastModifiedAt
+                #...
+            }
+        }`;
+
+    }
+    else {
+
+        return `mutation {
+    ${mutationName}(draft: {
+      ${buildInputFields(json)}
+    }) {
+      id
+      version
+      createdAt
+      #...
+    }
+  }`;
+    }
+}

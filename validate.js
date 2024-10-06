@@ -39,7 +39,7 @@ function validateGraphQLFiles(folderPath) {
                 errors.forEach(err => console.error(err.message));
                 invalidFiles++;
             } else {
-                console.log(`${file} is valid!`);
+                // console.log(`${file} is valid!`);
             }
         } catch (err) {
             console.error(`Error parsing ${file}:`, err.message);
