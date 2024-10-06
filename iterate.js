@@ -216,13 +216,51 @@ function CreateFile(operationId) {
         else {
             if (processedIds[1].includes("InStore")) {
                 // TODO: InStore stuff
+
+                let inStoreProcessedIds = processedIds[1].split("InStoreKeyByStoreKey")
+                console.log(inStoreProcessedIds)
+
+                if (inStoreProcessedIds[1].startsWith("Me")) {
+                    // TODO: Me endpoint stuff
+                }
+                else {
+                    // Special case for posting, deleting
+                    if (inStoreProcessedIds[1].endsWith("Post")) {
+
+                    }
+                    else if (inStoreProcessedIds[1].endsWith("Delete")) {
+
+                    }
+                    else {
+                        graphqlQuery += `query{
+                        inStore(key:"{key}"){
+                        ${processStuff(inStoreProcessedIds, true)}
+                        }
+                        }`
+                    }
+                }
             }
             else {
                 if (processedIds[1].startsWith("Me")) {
                     // TODO: Me endpoint stuff
                 }
                 else {
-                    let keyOrID = processedIds[1].includes("ByID") ? `id: "{id}"` : `key: "{key}"`;
+                    graphqlQuery += processStuff(processedIds)
+                }
+            }
+        }
+
+        fs.writeFileSync("graphql-files/" + operationId + ".graphql", graphqlQuery)
+
+    }
+}
+
+function processStuff(processedIds, isInStore) {
+    let graphqlQuery = "";
+    const queryText = isInStore ? "" : "query {";
+    let addStoreKey = isInStore ? '\nstoreKey:"{storeKey}"' : ""
+    console.log("QUERYTEXT: " + queryText)
+    let keyOrID = processedIds[1].includes("ByID") ? `id: "{id}"` : `key: "{key}"`;
 
                     // Calling an individual resource
                     if (processedIds[1].includes("KeyByKey") || processedIds[1].includes("ByID")) {
@@ -238,79 +276,78 @@ function CreateFile(operationId) {
                             updateActionName = "changeKey";
                         }
 
-
+                        // Updating a resource
                         if (endpointAndMethod[1] === "Post") {
 
-                            graphqlQuery += `${jsonToGraphQLMutation(JSON.parse(getContentOfExampleFile(exampleFileEndpoint[endpointName], "update")), `update${singularEndpoint[endpointName]}`, keyOrID)}`
-
-                            /*graphqlQuery += `mutation{
-                            update${singularEndpoint[endpointName]}(
-                                ${keyOrID}
-                                version: 1
-                                actions:[
-                                    {
-                                        ${updateActionName}:{
-                                            key: "new-key"
-                                        }
-                                    }
-                                ]
-                            )
-                            {
-                                id
-                                version
-                                name
-                            }
-                        }`;*/
+                            graphqlQuery += `${jsonToGraphQLMutation(JSON.parse(getContentOfExampleFile(exampleFileEndpoint[endpointName], "update")), `update${singularEndpoint[endpointName]}`, keyOrID)}`                            
                         }
 
+                        // Deleting a resource
                         if (endpointAndMethod[1] === "Delete") {
 
                             graphqlQuery += `mutation{
-                            delete${singularEndpoint[endpointName]}(
+                            delete${singularEndpoint[endpointName]}(${addStoreKey}
                                 ${keyOrID}
                                 version: 1                                
                             )
                             {
                                 id
                                 version
-                                name
+                                #...
                             }
                         }`;
                         }
 
+                        // Checking existence of a resource
                         if (endpointAndMethod[1] === "Head") {
 
-                            graphqlQuery += `query{
-                                ${lowerCaseFirstLetter(endpointName)}(where:${processedIds[1].includes("ByID") ? '"id=\\\"{id}\\\""' : '"key=\\\"{key}\\\""'}){
-                                    exists
-                                }
-                            }`;
+                            let addContainerToCustomObject = lowerCaseFirstLetter(singularEndpoint[endpointName]) === "customObjects" ? `container:"{container}"` : ""
+
+                            graphqlQuery += `${queryText}
+                                ${lowerCaseFirstLetter(endpointName)}( ${addContainerToCustomObject}
+                                where:${processedIds[1].includes("ByID") ? '"id=\\\"{id}\\\""' : '"key=\\\"{key}\\\""'}){
+                                    exists`
+                            if (!isInStore) { graphqlQuery += "}" }
+                            graphqlQuery += `}`;
                         }
 
+                        // Quering a resource
                         if (endpointAndMethod[1] === "Get") {
 
-                            graphqlQuery += `query{
-                                ${lowerCaseFirstLetter(singularEndpoint[endpointName])}(${keyOrID}){
+
+                            let addContainerToCustomObject = lowerCaseFirstLetter(singularEndpoint[endpointName]) === "customObjects" ? `container:"{container}"` : ""
+
+
+                            graphqlQuery += `${queryText}
+                                ${lowerCaseFirstLetter(singularEndpoint[endpointName])}(${addContainerToCustomObject}
+                                ${keyOrID}){
                                     id
                                     version
                                     createdAt
                                     #...
-                                }
-                                }`;
+                                    `
+
+                            if (!isInStore) { graphqlQuery += "}" }
+                            graphqlQuery += `}`;
                         }
 
                     }
                     else {
                         let endpointName = "";
 
+                        // Get all resources
                         if (processedIds[1].split("Get").length === 2) {
 
                             endpointName = lowerCaseFirstLetter(processedIds[1].split("Get")[0]);
                             //console.log(endpointName)
                             if (endpointName === "productTailoring") { endpointName = "productTailoringList"; }
                             if (endpointName === "types") { endpointName = "typeDefinitions"; }
+                            if (endpointName === "inventory") { endpointName = "inventoryEntries"; }
 
-                            graphqlQuery += `query{
+
+                            let addContainerToCustomObject = endpointName === "customObjects" ? `(container:"{container}")` : ""
+
+                            graphqlQuery += `query${addContainerToCustomObject}{
                                 ${endpointName}{
                                     offset
                                     count
@@ -320,27 +357,33 @@ function CreateFile(operationId) {
                                     version
                                     createdAt
                                     #...
-                                    }
-                                }
-                            }`;
+                                    }`
+
+                            if (!isInStore) { graphqlQuery += "}" }
+                            graphqlQuery += `}`;
                         }
 
+                        // Check existence using query predicate
                         if (processedIds[1].split("Head").length === 2) {
 
                             endpointName = lowerCaseFirstLetter(processedIds[1].split("Head")[0]);
                             //console.log(endpointName)
                             if (endpointName === "productTailoring") { endpointName = "productTailoringList"; }
                             if (endpointName === "types") { endpointName = "typeDefinitions"; }
+                            if (endpointName === "inventory") { endpointName = "inventoryEntries"; }
+
+
+                            let addContainerToCustomObject = endpointName === "customObjects" ? ` container:"{container}"` : ""
 
                             graphqlQuery += `query{
-                                ${endpointName}(where:"id=\\\"{id}\\\""){
+                                ${endpointName}(where:"id=\\\"{id}\\\""${addContainerToCustomObject}){
                                     exists
                                 }
                             
                         }`;
                         }
 
-
+                        // Create a resource
                         if (processedIds[1].split("Post").length === 2) {
 
                             //console.log(processedIds[1])
@@ -359,14 +402,9 @@ function CreateFile(operationId) {
                             }
                         }
                     }
-                }
-            }
-        }
-
-        fs.writeFileSync("graphql-files/" + operationId + ".graphql", graphqlQuery)
-
-    }
+    return graphqlQuery;
 }
+
 
 function getContentOfExampleFile(endpoint, createOrUpdate) {
 
@@ -386,9 +424,10 @@ function getContentOfExampleFile(endpoint, createOrUpdate) {
     }
 }
 
-function jsonToGraphQLMutation(json, mutationName, updateKeyOrId) {
+function jsonToGraphQLMutation(json, mutationName, updateKeyOrId, isInStore, isAssociate) {
 
     let version = 1;
+    let addStoreKey = isInStore ? '\nstoreKey:"{storeKey}"' : "";
     // Helper function to recursively build the mutation input
 
     const buildInputFields = (obj) => {
@@ -431,6 +470,12 @@ function jsonToGraphQLMutation(json, mutationName, updateKeyOrId) {
                     return ""
                 }
                 else {
+                    if (key === "w") {
+                        return `width: ${value}`
+                    }
+                    if (key === "h") {
+                        return `height: ${value}`
+                    }
                     // Numbers, booleans, etc., don't need quotes
                     return `${key}: ${value}`;    // Leave numbers, booleans, etc., as is
                 }
@@ -456,7 +501,7 @@ function jsonToGraphQLMutation(json, mutationName, updateKeyOrId) {
         }
 
         return `mutation {
-            ${mutationName}(
+            ${mutationName}(${addStoreKey}
                 version: ${version}
                 ${updateKeyOrId}                
                 ${values}                
@@ -472,7 +517,8 @@ function jsonToGraphQLMutation(json, mutationName, updateKeyOrId) {
     else {
 
         return `mutation {
-    ${mutationName}(draft: {
+    ${mutationName}(${addStoreKey}
+        draft: {
       ${buildInputFields(json)}
     }) {
       id

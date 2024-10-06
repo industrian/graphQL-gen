@@ -53,6 +53,8 @@ function validateGraphQLFiles(folderPath) {
                             console.log(value)
 
                             let updatedQuery = query.replace(`: "${value}"`, `: ${value}`)
+                            updatedQuery = updatedQuery.replace(`, "${value}"`, `, ${value}`)
+                            updatedQuery = updatedQuery.replace(`"${value}", `, `${value}, `)
                             console.log(updatedQuery)
 
                             fs.writeFileSync("graphql-files/" + file, updatedQuery)
