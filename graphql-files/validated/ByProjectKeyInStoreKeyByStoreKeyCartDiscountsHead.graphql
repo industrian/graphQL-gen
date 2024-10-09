@@ -1,5 +1,5 @@
 query {
-  inStore(key: "{key}") {
+  inStore(key: "{storeKey}") {
     cartDiscounts(where: "id=\"{id}\"") {
       exists
     }

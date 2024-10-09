@@ -1,5 +1,5 @@
 query {
-  inStore(key: "{key}") {
+  inStore(key: "{storeKey}") {
     quoteRequest(id: "{id}") {
       id
       version
