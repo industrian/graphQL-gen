@@ -40,26 +40,27 @@ function validateGraphQLFiles(folderPath) {
                 console.error(`Validation errors in ${file}:`);
                 errors.forEach(
                     err => {
-                        console.error(err.message)
+                        //console.error(err.message)
 
+                        invalidFiles++;
                         // Replace enum values
                         if (err.message.includes("cannot represent non-enum value")) {
-                            console.log("Fixing enum")
+                            //console.log("Fixing enum")
 
                             let field = err.message.match(/Enum "([^"]*)"/)[1];
                             //console.log(field)
 
                             let value = err.message.match(/cannot represent non-enum value: "([^"]*)"/)[1];
-                            console.log(value)
+                            //console.log(value)
 
                             let updatedQuery = query.replace(`: "${value}"`, `: ${value}`)
                             updatedQuery = updatedQuery.replace(`, "${value}"`, `, ${value}`)
                             updatedQuery = updatedQuery.replace(`"${value}", `, `${value}, `)
-                            console.log(updatedQuery)
+                            //console.log(updatedQuery)
 
                             fs.writeFileSync("graphql-files/" + file, updatedQuery)
 
-                            rerunValidation = true;
+                            //rerunValidation = true;
                         }
                     }
                 );
@@ -70,8 +71,7 @@ function validateGraphQLFiles(folderPath) {
                 // console.log(`${file} is valid!`);
             }
         } catch (err) {
-            console.error(`Error parsing ${file}:`, err.message);
-            invalidFiles++;
+            //console.error(`Error parsing ${file}:`, err.message);
         }
     });
 

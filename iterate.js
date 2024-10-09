@@ -157,8 +157,9 @@ function iterateOAS(oasDocument) {
     }
 }
 
+// TODO: Uncomment out this function to process the files again. It is disabled as I'm now doing it manually.
 // Step 3: Call the function with the file path to the OAS YAML
-loadOASYaml('../commercetools-api-reference/oas/api/openapi.yaml');
+//loadOASYaml('../commercetools-api-reference/oas/api/openapi.yaml');
 
 /**
  * 
