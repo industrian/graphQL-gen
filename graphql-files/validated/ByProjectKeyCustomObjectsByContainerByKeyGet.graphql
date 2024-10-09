@@ -1,0 +1,8 @@
+query {
+  customObject(container: "{container}", key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

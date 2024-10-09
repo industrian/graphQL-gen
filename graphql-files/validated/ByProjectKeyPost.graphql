@@ -1,0 +1,13 @@
+mutation {
+  updateProject(
+    version: 1
+    actions: [{ changeCurrencies: { currencies: ["EUR", "USD"] } }]
+  ) {
+    version
+    key
+    name
+    countries
+    currencies
+    #...
+  }
+}

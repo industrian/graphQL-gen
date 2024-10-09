@@ -13,6 +13,8 @@ const schema = buildSchema(schemaSDL);
 
 // 3. Define the folder where your GraphQL files are located
 const graphqlFolder = path.join(path.resolve(), 'graphql-files');
+const validatedFolder = path.join(path.resolve(), 'graphql-files/validated');
+const impossibleFolder = path.join(path.resolve(), 'graphql-files/impossible');
 
 // 4. Function to load and validate all GraphQL files in a folder
 function validateGraphQLFiles(folderPath) {
@@ -69,9 +71,31 @@ function validateGraphQLFiles(folderPath) {
                 invalidFiles++;
             } else {
                 // console.log(`${file} is valid!`);
+                try {
+                    fs.copyFileSync(graphqlFolder + "/" + file, validatedFolder + "/" + file);
+                    console.log('Validated file copied successfully');
+
+                    fs.unlinkSync(graphqlFolder + "/" + file);
+                    console.log('Validated source file deleted successfully');
+                } catch (err) {
+                    console.error('Error copying file:', err);
+                }
+
+
+
             }
         } catch (err) {
-            //console.error(`Error parsing ${file}:`, err.message);
+            if (err.message.includes('Unexpected Name "impossible"')) {
+                try {
+                    fs.copyFileSync(graphqlFolder + "/" + file, impossibleFolder + "/" + file);
+                    console.log('Impossible function file copied successfully');
+
+                    fs.unlinkSync(graphqlFolder + "/" + file);
+                    console.log('Impossible function file deleted successfully');
+                } catch (err) {
+                    console.error('Error copying file:', err);
+                }
+            }
         }
     });
 
