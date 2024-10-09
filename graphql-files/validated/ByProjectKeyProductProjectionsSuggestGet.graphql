@@ -1,0 +1,15 @@
+query {
+  productProjectionsSuggest(
+    searchKeywords: [
+      { searchKeyword: "Schweizer Messer", locale: "de" }
+      { searchKeyword: "Multi tool", locale: "en" }
+    ]
+  ) {
+    searchKeywords {
+      locale
+      suggestions {
+        text
+      }
+    }
+  }
+}
