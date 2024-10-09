@@ -1,0 +1,5 @@
+query {
+  quotes(where: "id=\"{id}\"") {
+    exists
+  }
+}

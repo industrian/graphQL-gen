@@ -1,0 +1,12 @@
+mutation {
+  updateTypeDefinition(
+    version: 1
+    key: "{key}"
+    actions: [{ changeName: { name: [{ locale: "en", value: "New Name" }] } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

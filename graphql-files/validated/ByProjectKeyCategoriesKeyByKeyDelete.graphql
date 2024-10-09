@@ -1,0 +1,7 @@
+mutation {
+  deleteCategory(key: "{key}", version: 1) {
+    id
+    version
+    #...
+  }
+}

@@ -1,0 +1,13 @@
+mutation {
+  createProductSelection(
+    draft: {
+      key: "finest-selection"
+      name: [{ locale: "en", value: "Finest Selection" }]
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

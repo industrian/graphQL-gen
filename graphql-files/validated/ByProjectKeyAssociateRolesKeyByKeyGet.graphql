@@ -1,0 +1,8 @@
+query {
+  associateRole(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

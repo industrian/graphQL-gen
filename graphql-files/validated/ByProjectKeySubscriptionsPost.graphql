@@ -1,0 +1,20 @@
+mutation {
+  createSubscription(
+    draft: {
+      destination: {
+        SQS: {
+          queueUrl: "<url-to-my-queue>"
+          authenticationMode: IAM
+          region: "<my-region>"
+        }
+      }
+      messages: [{ resourceTypeId: "product", types: [] }]
+      key: "test-queue"
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

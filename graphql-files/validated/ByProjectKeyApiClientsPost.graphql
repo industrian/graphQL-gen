@@ -1,0 +1,14 @@
+mutation {
+  createApiClient(
+    draft: {
+      name: "api-client-name"
+      scope: "view_products:{projectKey}"
+      accessTokenValiditySeconds: 3600
+      refreshTokenValiditySeconds: 31536000
+    }
+  ) {
+    id
+    createdAt
+    #...
+  }
+}

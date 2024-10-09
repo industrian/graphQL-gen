@@ -1,0 +1,15 @@
+query {
+  me {
+    businessUnits {
+      offset
+      count
+      total
+      results {
+        id
+        version
+        createdAt
+        #...
+      }
+    }
+  }
+}

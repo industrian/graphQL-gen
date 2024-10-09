@@ -1,0 +1,8 @@
+query {
+  message(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

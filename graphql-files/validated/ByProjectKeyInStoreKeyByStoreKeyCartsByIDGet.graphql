@@ -1,0 +1,10 @@
+query {
+  inStore(key: "{key}") {
+    cart(id: "{id}") {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

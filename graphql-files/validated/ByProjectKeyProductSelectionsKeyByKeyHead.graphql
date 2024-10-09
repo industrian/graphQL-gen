@@ -1,0 +1,5 @@
+query {
+  productSelections(where: "key=\"{key}\"") {
+    exists
+  }
+}

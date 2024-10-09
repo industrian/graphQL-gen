@@ -1,0 +1,8 @@
+query {
+  productDiscount(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

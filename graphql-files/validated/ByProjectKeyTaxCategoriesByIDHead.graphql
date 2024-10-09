@@ -1,0 +1,5 @@
+query {
+  taxCategories(where: "id=\"{id}\"") {
+    exists
+  }
+}

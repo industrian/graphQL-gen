@@ -1,0 +1,5 @@
+query {
+  typeDefinitions(where: "key=\"{key}\"") {
+    exists
+  }
+}

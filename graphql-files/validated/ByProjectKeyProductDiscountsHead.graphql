@@ -1,0 +1,5 @@
+query {
+  productDiscounts(where: "id=\"{id}\"") {
+    exists
+  }
+}

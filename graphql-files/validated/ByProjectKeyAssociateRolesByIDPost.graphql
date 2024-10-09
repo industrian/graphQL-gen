@@ -1,0 +1,12 @@
+mutation {
+  updateAssociateRole(
+    version: 3
+    id: "{id}"
+    actions: [{ setName: { name: "regional-manager" } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

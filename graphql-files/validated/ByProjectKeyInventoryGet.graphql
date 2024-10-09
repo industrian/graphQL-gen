@@ -1,0 +1,13 @@
+query {
+  inventoryEntries {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

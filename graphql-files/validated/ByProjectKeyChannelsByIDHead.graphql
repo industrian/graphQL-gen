@@ -1,0 +1,5 @@
+query {
+  channels(where: "id=\"{id}\"") {
+    exists
+  }
+}

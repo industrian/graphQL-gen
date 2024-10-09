@@ -1,0 +1,15 @@
+mutation {
+  createAttributeGroup(
+    draft: {
+      name: [{ locale: "en", value: "Sample name" }]
+      description: [{ locale: "en", value: "Sample description" }]
+      key: "group-1"
+      attributes: [{ key: "Attribute 1" }, { key: "Attribute 2" }]
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

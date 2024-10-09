@@ -1,0 +1,10 @@
+mutation {
+  createBusinessUnit(
+    draft: { name: "commercetools", unitType: Company, key: "commercetools" }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

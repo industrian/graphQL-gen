@@ -1,0 +1,24 @@
+mutation {
+  createProductType(
+    draft: {
+      name: "test_product_type"
+      description: "Test product type."
+      attributeDefinitions: [
+        {
+          type: { text: { dummy: "" } }
+          isSearchable: false
+          inputHint: SingleLine
+          name: "size"
+          label: [{ locale: "en", value: "The right size is important." }]
+          isRequired: false
+          attributeConstraint: CombinationUnique
+        }
+      ]
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

@@ -1,0 +1,18 @@
+mutation {
+  updateProduct(
+    version: 2
+    key: "{key}"
+    actions: [
+      {
+        setDescription: {
+          description: [{ locale: "en", value: "The best product ever!" }]
+        }
+      }
+    ]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

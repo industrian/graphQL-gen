@@ -1,0 +1,5 @@
+query {
+  productSelections(where: "id=\"{id}\"") {
+    exists
+  }
+}

@@ -1,0 +1,13 @@
+query {
+  associateRoles {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

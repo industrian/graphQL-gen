@@ -1,0 +1,8 @@
+query {
+  category(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

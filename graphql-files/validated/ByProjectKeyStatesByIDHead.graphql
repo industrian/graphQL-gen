@@ -1,0 +1,5 @@
+query {
+  states(where: "id=\"{id}\"") {
+    exists
+  }
+}

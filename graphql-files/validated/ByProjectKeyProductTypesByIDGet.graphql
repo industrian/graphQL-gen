@@ -1,0 +1,8 @@
+query {
+  productType(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

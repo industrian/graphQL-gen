@@ -1,0 +1,13 @@
+query {
+  payments {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

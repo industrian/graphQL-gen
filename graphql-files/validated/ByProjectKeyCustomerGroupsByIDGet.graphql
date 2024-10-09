@@ -1,0 +1,8 @@
+query {
+  customerGroup(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

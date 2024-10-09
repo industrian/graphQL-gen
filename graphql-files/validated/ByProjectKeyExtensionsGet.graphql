@@ -1,0 +1,13 @@
+query {
+  extensions {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

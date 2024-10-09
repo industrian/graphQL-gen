@@ -1,0 +1,8 @@
+query {
+  shippingMethod(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

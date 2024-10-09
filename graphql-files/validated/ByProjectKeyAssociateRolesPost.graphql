@@ -1,0 +1,14 @@
+mutation {
+  createAssociateRole(
+    draft: {
+      key: "regional-manager"
+      permissions: [ViewMyCarts, UpdateMyCarts]
+      buyerAssignable: true
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

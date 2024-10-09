@@ -1,0 +1,8 @@
+query {
+  standalonePrice(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

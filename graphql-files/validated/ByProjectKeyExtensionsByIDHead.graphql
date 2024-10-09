@@ -1,0 +1,5 @@
+query {
+  extensions(where: "id=\"{id}\"") {
+    exists
+  }
+}

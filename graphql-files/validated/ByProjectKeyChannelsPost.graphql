@@ -1,0 +1,8 @@
+mutation {
+  createChannel(draft: { key: "commercetools", roles: [InventorySupply] }) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

@@ -1,0 +1,5 @@
+query {
+  carts(where: "key=\"{key}\"") {
+    exists
+  }
+}

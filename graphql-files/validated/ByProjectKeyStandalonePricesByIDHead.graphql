@@ -1,0 +1,5 @@
+query {
+  standalonePrices(where: "id=\"{id}\"") {
+    exists
+  }
+}

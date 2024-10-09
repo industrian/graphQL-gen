@@ -1,0 +1,8 @@
+query {
+  customer(emailToken: "{emailToken}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

@@ -1,0 +1,5 @@
+query {
+  productTypes(where: "key=\"{key}\"") {
+    exists
+  }
+}

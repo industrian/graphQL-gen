@@ -1,0 +1,7 @@
+mutation {
+  deleteShippingMethod(key: "{key}", version: 1) {
+    id
+    version
+    #...
+  }
+}

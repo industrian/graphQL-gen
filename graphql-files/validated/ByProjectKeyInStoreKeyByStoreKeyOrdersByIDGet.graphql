@@ -1,0 +1,10 @@
+query {
+  inStore(key: "{key}") {
+    order(id: "{id}") {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

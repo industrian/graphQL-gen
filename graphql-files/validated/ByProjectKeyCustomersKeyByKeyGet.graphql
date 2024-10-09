@@ -1,0 +1,8 @@
+query {
+  customer(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

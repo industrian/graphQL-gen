@@ -1,0 +1,8 @@
+query {
+  typeDefinition(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

@@ -1,0 +1,12 @@
+mutation {
+  updateProductType(
+    version: 3
+    key: "{key}"
+    actions: [{ changeName: { name: "new-product-type-name" } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

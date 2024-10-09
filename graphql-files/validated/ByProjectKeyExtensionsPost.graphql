@@ -1,0 +1,21 @@
+mutation {
+  createExtension(
+    draft: {
+      destination: {
+        HTTP: {
+          url: "https://example.azurewebsites.net/api/extension"
+          authentication: {
+            AzureFunctions: { key: "some-azure-function-code" }
+          }
+        }
+      }
+      triggers: [{ resourceTypeId: "cart", actions: [Create, Update] }]
+      key: "my-extension"
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

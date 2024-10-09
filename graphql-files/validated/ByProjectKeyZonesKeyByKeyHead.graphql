@@ -1,0 +1,5 @@
+query {
+  zones(where: "key=\"{key}\"") {
+    exists
+  }
+}

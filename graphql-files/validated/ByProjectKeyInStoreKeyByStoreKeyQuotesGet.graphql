@@ -1,0 +1,15 @@
+query {
+  inStore(key: "{key}") {
+    quotes {
+      offset
+      count
+      total
+      results {
+        id
+        version
+        createdAt
+        #...
+      }
+    }
+  }
+}

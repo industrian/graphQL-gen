@@ -1,0 +1,12 @@
+mutation {
+  updateShippingMethod(
+    version: 1
+    key: "{key}"
+    actions: [{ changeName: { name: "New Name" } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

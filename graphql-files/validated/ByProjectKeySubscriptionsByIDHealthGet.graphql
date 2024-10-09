@@ -1,0 +1,5 @@
+query {
+  subscription(id: "{id}") {
+    status
+  }
+}

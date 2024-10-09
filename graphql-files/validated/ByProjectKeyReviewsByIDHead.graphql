@@ -1,0 +1,5 @@
+query {
+  reviews(where: "id=\"{id}\"") {
+    exists
+  }
+}

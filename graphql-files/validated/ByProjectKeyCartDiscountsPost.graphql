@@ -1,0 +1,19 @@
+mutation {
+  createCartDiscount(
+    draft: {
+      name: [{ locale: "en", value: "Summer Sale" }]
+      value: { relative: { permyriad: 1000 } }
+      cartPredicate: "1=1"
+      target: { lineItems: { predicate: "1=1" } }
+      sortOrder: "0.1"
+      stores: [{ key: "{{store-key}}" }]
+      isActive: true
+      requiresDiscountCode: false
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

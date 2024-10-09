@@ -1,0 +1,13 @@
+query {
+  productTailoringList {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

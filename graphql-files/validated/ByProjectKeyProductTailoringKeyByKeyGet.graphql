@@ -1,0 +1,8 @@
+query {
+  productTailoring(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

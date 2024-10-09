@@ -1,0 +1,8 @@
+query {
+  productSelection(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

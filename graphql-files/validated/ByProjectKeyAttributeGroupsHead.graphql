@@ -1,0 +1,5 @@
+query {
+  attributeGroups(where: "id=\"{id}\"") {
+    exists
+  }
+}

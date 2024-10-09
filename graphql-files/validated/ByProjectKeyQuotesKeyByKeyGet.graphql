@@ -1,0 +1,8 @@
+query {
+  quote(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

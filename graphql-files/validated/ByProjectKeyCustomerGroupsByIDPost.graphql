@@ -1,0 +1,12 @@
+mutation {
+  updateCustomerGroup(
+    version: 1
+    id: "{id}"
+    actions: [{ changeName: { name: "New Name" } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

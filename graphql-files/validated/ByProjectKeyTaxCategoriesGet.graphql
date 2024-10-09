@@ -1,0 +1,13 @@
+query {
+  taxCategories {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

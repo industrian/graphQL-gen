@@ -1,0 +1,8 @@
+query {
+  discountCode(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

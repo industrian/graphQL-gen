@@ -1,0 +1,8 @@
+query {
+  businessUnit(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

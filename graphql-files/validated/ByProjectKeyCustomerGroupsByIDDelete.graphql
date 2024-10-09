@@ -1,0 +1,7 @@
+mutation {
+  deleteCustomerGroup(id: "{id}", version: 1) {
+    id
+    version
+    #...
+  }
+}

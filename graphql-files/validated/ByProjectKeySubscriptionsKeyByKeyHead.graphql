@@ -1,0 +1,5 @@
+query {
+  subscriptions(where: "key=\"{key}\"") {
+    exists
+  }
+}

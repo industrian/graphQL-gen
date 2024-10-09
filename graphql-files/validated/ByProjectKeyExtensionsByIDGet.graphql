@@ -1,0 +1,8 @@
+query {
+  extension(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

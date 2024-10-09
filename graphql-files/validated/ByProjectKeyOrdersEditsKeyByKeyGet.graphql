@@ -1,0 +1,8 @@
+query {
+  orderEdit(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

@@ -1,0 +1,8 @@
+query {
+  subscription(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

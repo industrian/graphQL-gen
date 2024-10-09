@@ -1,0 +1,5 @@
+query {
+  messages(where: "id=\"{id}\"") {
+    exists
+  }
+}

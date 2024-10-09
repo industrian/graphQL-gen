@@ -1,0 +1,7 @@
+mutation {
+  deleteProductTailoring(id: "{id}", version: 1) {
+    id
+    version
+    #...
+  }
+}

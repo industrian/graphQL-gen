@@ -1,0 +1,8 @@
+query {
+  payment(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

@@ -1,0 +1,8 @@
+query {
+  channel(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

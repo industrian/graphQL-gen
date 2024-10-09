@@ -1,0 +1,8 @@
+query {
+  quoteRequest(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

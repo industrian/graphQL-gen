@@ -1,0 +1,8 @@
+query {
+  inventoryEntry(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

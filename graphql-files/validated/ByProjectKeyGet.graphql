@@ -1,0 +1,10 @@
+query {
+  project {
+    version
+    key
+    name
+    countries
+    currencies
+    #...
+  }
+}

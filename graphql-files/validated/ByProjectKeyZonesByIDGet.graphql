@@ -1,0 +1,8 @@
+query {
+  zone(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

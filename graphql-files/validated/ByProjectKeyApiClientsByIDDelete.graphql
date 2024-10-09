@@ -1,0 +1,7 @@
+mutation {
+  deleteApiClient(id: "{id}") {
+    id
+
+    #...
+  }
+}

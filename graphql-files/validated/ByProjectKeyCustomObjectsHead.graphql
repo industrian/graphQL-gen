@@ -1,0 +1,5 @@
+query {
+  customObjects(where: "id=\"{id}\"", container: "{container}") {
+    exists
+  }
+}

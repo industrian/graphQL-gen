@@ -1,0 +1,8 @@
+query {
+  shippingMethodsByCart(id: "{cartId}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

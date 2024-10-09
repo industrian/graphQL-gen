@@ -1,0 +1,7 @@
+mutation {
+  deleteStagedQuote(key: "{key}", version: 1) {
+    id
+    version
+    #...
+  }
+}

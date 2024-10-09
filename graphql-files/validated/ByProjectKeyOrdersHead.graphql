@@ -1,0 +1,5 @@
+query {
+  orders(where: "id=\"{id}\"") {
+    exists
+  }
+}

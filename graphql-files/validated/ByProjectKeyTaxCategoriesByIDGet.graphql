@@ -1,0 +1,8 @@
+query {
+  taxCategory(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

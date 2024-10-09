@@ -1,0 +1,8 @@
+mutation {
+  createZone(draft: { name: "US", locations: [{ country: "US" }] }) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

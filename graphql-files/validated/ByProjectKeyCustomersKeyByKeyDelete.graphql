@@ -1,0 +1,7 @@
+mutation {
+  deleteCustomer(key: "{key}", version: 1) {
+    id
+    version
+    #...
+  }
+}

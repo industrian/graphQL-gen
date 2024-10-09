@@ -1,0 +1,10 @@
+query {
+  inStore(key: "{key}") {
+    quote(key: "{key}") {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

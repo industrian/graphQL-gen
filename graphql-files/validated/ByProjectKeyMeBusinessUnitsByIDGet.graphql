@@ -1,0 +1,10 @@
+query {
+  me {
+    businessUnit(id: "{id}") {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

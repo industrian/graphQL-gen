@@ -1,0 +1,12 @@
+mutation {
+  updateStagedQuote(
+    version: 1
+    id: "{id}"
+    actions: [{ changeStagedQuoteState: { stagedQuoteState: Sent } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

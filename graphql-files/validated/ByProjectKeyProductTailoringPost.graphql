@@ -1,0 +1,34 @@
+mutation {
+  createProductTailoring(
+    storeKey: { key: "store-key" }
+    draft: {
+      product: { typeId: "product", id: "daf720e5-9e8e-4300-98db-3a3219327db9" }
+      name: [{ locale: "en", value: "tailored name" }]
+      metaTitle: [{ locale: "en", value: "tailored meta title" }]
+      metaDescription: [{ locale: "en", value: "tailored meta description" }]
+      metaKeywords: [{ locale: "en", value: "tailored meta keywords" }]
+      slug: [{ locale: "en", value: "tailored-slug" }]
+      description: [{ locale: "en", value: "tailored description" }]
+      variants: [
+        {
+          id: 1
+          images: [
+            { url: "//myimage.jpg", dimensions: { width: 400, height: 300 } }
+          ]
+        }
+        {
+          sku: "sku-1"
+          images: [
+            { url: "//myimage-2.png", dimensions: { width: 400, height: 300 } }
+          ]
+        }
+      ]
+      publish: false
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

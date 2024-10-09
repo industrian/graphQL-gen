@@ -1,0 +1,12 @@
+mutation {
+  updateInventoryEntry(
+    version: 1
+    id: "{id}"
+    actions: [{ addQuantity: { quantity: 4 } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

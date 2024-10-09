@@ -1,0 +1,7 @@
+mutation {
+  deleteCart(id: "{id}", version: 1) {
+    id
+    version
+    #...
+  }
+}

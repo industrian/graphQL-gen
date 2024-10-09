@@ -1,0 +1,12 @@
+mutation {
+  updateReview(
+    version: 1
+    id: "{id}"
+    actions: [{ setAuthorName: { authorName: "John Doe" } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

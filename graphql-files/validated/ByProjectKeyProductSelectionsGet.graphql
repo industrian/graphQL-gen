@@ -1,0 +1,13 @@
+query {
+  productSelections {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

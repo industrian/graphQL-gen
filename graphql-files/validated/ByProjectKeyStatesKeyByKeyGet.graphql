@@ -1,0 +1,8 @@
+query {
+  state(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

@@ -1,0 +1,12 @@
+mutation {
+  updateState(
+    version: 1
+    id: "{id}"
+    actions: [{ setName: { name: [{ locale: "en", value: "New Name" }] } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

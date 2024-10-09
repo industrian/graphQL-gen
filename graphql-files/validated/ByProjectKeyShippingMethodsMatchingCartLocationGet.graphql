@@ -1,0 +1,9 @@
+query {
+  shippingMethodsByLocation(country: "{country}") {
+    id
+    name
+    version
+    createdAt
+    #...
+  }
+}

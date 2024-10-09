@@ -1,0 +1,5 @@
+query {
+  shoppingLists(where: "id=\"{id}\"") {
+    exists
+  }
+}

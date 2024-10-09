@@ -1,0 +1,7 @@
+query {
+  apiClient(id: "{id}") {
+    id
+    createdAt
+    #...
+  }
+}

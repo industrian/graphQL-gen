@@ -1,0 +1,15 @@
+query {
+  me {
+    quoteRequests {
+      offset
+      count
+      total
+      results {
+        id
+        version
+        createdAt
+        #...
+      }
+    }
+  }
+}

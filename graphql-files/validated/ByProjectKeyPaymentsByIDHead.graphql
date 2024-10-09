@@ -1,0 +1,5 @@
+query {
+  payments(where: "id=\"{id}\"") {
+    exists
+  }
+}

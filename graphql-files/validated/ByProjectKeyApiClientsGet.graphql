@@ -1,0 +1,13 @@
+query {
+  apiClients {
+    offset
+    count
+    total
+    results {
+      id
+
+      createdAt
+      #...
+    }
+  }
+}

@@ -1,0 +1,15 @@
+mutation {
+  createCategory(
+    draft: {
+      name: [{ locale: "en", value: "Hats" }]
+      slug: [{ locale: "en", value: "hats" }]
+      parent: { typeId: "category", id: "123456" }
+      orderHint: "0.1"
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

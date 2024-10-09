@@ -1,0 +1,5 @@
+query {
+  shippingMethods(where: "key=\"{key}\"") {
+    exists
+  }
+}

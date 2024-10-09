@@ -1,0 +1,17 @@
+mutation {
+  customerSignUp(
+    draft: {
+      email: "johndoe@example.com"
+      firstName: "John"
+      lastName: "Doe"
+      password: "secret123"
+    }
+  ) {
+    customer {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

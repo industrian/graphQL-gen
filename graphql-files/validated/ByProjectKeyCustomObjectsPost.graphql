@@ -1,0 +1,10 @@
+mutation {
+  createOrUpdateCustomObject(
+    draft: { container: "test-container", key: "test-key", value: "test-value" }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

@@ -1,0 +1,12 @@
+mutation {
+  updateShoppingList(
+    version: 1
+    id: "{id}"
+    actions: [{ changeName: { name: [{ locale: "en", value: "New Name" }] } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

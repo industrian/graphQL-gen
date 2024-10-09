@@ -1,0 +1,8 @@
+query {
+  stagedQuote(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

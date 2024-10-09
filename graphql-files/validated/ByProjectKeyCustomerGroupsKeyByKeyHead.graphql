@@ -1,0 +1,5 @@
+query {
+  customerGroups(where: "key=\"{key}\"") {
+    exists
+  }
+}

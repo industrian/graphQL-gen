@@ -1,0 +1,7 @@
+mutation {
+  deleteTaxCategory(key: "{key}", version: 1) {
+    id
+    version
+    #...
+  }
+}

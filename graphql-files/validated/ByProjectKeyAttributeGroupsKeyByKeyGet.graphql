@@ -1,0 +1,8 @@
+query {
+  attributeGroup(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

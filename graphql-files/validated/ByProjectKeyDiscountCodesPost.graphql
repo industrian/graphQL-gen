@@ -1,0 +1,18 @@
+mutation {
+  createDiscountCode(
+    draft: {
+      code: "SAVE10"
+      name: [{ locale: "en", value: "Save10" }]
+      cartDiscounts: [
+        { typeId: "cart-discount", id: "fdbaf4ea-fbc9-4fea-bac4-1d7e6c1995b3" }
+      ]
+      isActive: true
+      cartPredicate: "1=1"
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

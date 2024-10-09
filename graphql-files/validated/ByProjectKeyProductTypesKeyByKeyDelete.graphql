@@ -1,0 +1,7 @@
+mutation {
+  deleteProductType(key: "{key}", version: 1) {
+    id
+    version
+    #...
+  }
+}

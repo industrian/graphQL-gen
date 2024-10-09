@@ -1,0 +1,10 @@
+query {
+  me {
+    shoppingList(id: "{id}") {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

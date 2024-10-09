@@ -1,0 +1,24 @@
+mutation {
+  createTypeDefinition(
+    draft: {
+      key: "lineitemtype"
+      name: [{ locale: "en", value: "lineitem" }]
+      description: [{ locale: "en", value: "description" }]
+      resourceTypeIds: ["line-item"]
+      fieldDefinitions: [
+        {
+          name: "offer_name"
+          label: [{ locale: "en", value: "offer_name" }]
+          required: false
+          type: { String: { dummy: "" } }
+          inputHint: SingleLine
+        }
+      ]
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

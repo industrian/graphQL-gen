@@ -1,0 +1,20 @@
+mutation {
+  updateAttributeGroup(
+    version: 100
+    key: "{key}"
+    actions: [
+      {
+        changeName: { name: [{ locale: "en", value: "Attribute Group" }] }
+        setDescription: {
+          description: [{ locale: "en", value: "Description" }]
+        }
+        setAttributes: { attributes: [{ key: "a1" }, { key: "a2" }] }
+      }
+    ]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

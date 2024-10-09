@@ -1,0 +1,13 @@
+query {
+  attributeGroups {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

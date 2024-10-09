@@ -1,0 +1,8 @@
+query {
+  cartDiscount(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

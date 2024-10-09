@@ -1,0 +1,7 @@
+mutation {
+  deleteProductDiscount(key: "{key}", version: 1) {
+    id
+    version
+    #...
+  }
+}

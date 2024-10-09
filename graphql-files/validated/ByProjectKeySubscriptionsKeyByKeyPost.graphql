@@ -1,0 +1,12 @@
+mutation {
+  updateSubscription(
+    version: 1
+    key: "{key}"
+    actions: [{ setKey: { key: "queue-key" } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

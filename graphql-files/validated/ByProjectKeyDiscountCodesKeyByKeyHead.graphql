@@ -1,0 +1,5 @@
+query {
+  discountCodes(where: "key=\"{key}\"") {
+    exists
+  }
+}

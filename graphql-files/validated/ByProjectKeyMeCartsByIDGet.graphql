@@ -1,0 +1,10 @@
+query {
+  me {
+    cart(id: "{id}") {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

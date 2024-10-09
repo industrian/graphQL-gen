@@ -1,0 +1,10 @@
+query {
+  me {
+    quoteRequest(key: "{key}") {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

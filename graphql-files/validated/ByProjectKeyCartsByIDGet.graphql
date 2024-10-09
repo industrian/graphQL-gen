@@ -1,0 +1,8 @@
+query {
+  cart(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

@@ -1,0 +1,13 @@
+query {
+  messages {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

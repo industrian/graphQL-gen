@@ -1,0 +1,8 @@
+mutation {
+  createCustomerGroup(draft: { groupName: "Webshop user" }) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

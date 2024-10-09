@@ -1,0 +1,10 @@
+mutation {
+  createState(
+    draft: { key: "test-state", type: ProductState, roles: [], initial: true }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

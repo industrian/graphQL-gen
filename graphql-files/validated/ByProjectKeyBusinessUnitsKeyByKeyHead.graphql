@@ -1,0 +1,5 @@
+query {
+  businessUnits(where: "key=\"{key}\"") {
+    exists
+  }
+}

@@ -1,0 +1,13 @@
+mutation {
+  createStandalonePrice(
+    draft: {
+      sku: "PT974SKT"
+      value: { centPrecision: { currencyCode: "EUR", centAmount: 10000 } }
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

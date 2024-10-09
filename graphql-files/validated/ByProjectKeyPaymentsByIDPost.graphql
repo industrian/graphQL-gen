@@ -1,0 +1,18 @@
+mutation {
+  updatePayment(
+    version: 1
+    id: "{id}"
+    actions: [
+      {
+        transitionState: {
+          state: { typeId: "state", id: "18748fe6-7f77-456a-96c8-913b1e4bbc9c" }
+        }
+      }
+    ]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

@@ -1,0 +1,8 @@
+query {
+  shoppingList(id: "{id}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

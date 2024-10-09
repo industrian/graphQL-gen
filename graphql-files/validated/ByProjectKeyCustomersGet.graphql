@@ -1,0 +1,13 @@
+query {
+  customers {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

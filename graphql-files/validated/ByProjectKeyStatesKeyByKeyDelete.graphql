@@ -1,0 +1,7 @@
+mutation {
+  deleteState(key: "{key}", version: 1) {
+    id
+    version
+    #...
+  }
+}

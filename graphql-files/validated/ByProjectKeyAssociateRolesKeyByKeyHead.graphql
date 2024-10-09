@@ -1,0 +1,5 @@
+query {
+  associateRoles(where: "key=\"{key}\"") {
+    exists
+  }
+}

@@ -1,0 +1,12 @@
+mutation {
+  updateCartDiscount(
+    version: 1
+    id: "{id}"
+    actions: [{ changeValue: { value: { relative: { permyriad: 1000 } } } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

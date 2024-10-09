@@ -1,0 +1,25 @@
+mutation {
+  createTaxCategory(
+    draft: {
+      name: "test-tax-category"
+      rates: [
+        {
+          name: "HST Ontario"
+          amount: 0.13
+          includedInPrice: true
+          country: "CA"
+          state: "ON"
+          subRates: [
+            { name: "Federal rate (GST 5%)", amount: 0.05 }
+            { name: "Provincial rate (PST 8%)", amount: 0.08 }
+          ]
+        }
+      ]
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

@@ -1,0 +1,13 @@
+query {
+  standalonePrices {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

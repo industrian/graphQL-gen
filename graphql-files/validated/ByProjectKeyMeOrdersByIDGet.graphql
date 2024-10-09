@@ -1,0 +1,10 @@
+query {
+  me {
+    order(id: "{id}") {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

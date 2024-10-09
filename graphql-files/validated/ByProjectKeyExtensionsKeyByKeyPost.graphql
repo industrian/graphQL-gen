@@ -1,0 +1,12 @@
+mutation {
+  updateExtension(
+    version: 1
+    key: "{key}"
+    actions: [{ setKey: { key: "my-new-extension-key" } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

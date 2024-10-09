@@ -1,0 +1,15 @@
+query {
+  inStore(key: "{key}") {
+    cartDiscounts {
+      offset
+      count
+      total
+      results {
+        id
+        version
+        createdAt
+        #...
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+query {
+  quotes(where: "key=\"{key}\"") {
+    exists
+  }
+}

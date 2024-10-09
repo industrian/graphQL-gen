@@ -1,0 +1,7 @@
+mutation {
+  deleteQuote(key: "{key}", version: 1) {
+    id
+    version
+    #...
+  }
+}

@@ -1,0 +1,5 @@
+query {
+  products(where: "id=\"{id}\"") {
+    exists
+  }
+}

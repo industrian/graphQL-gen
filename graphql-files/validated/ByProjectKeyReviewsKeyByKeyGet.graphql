@@ -1,0 +1,8 @@
+query {
+  review(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

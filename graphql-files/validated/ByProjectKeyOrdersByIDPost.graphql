@@ -1,0 +1,12 @@
+mutation {
+  updateOrder(
+    version: 1
+    id: "{id}"
+    actions: [{ changeOrderState: { orderState: Complete } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

@@ -1,0 +1,10 @@
+query {
+  me {
+    customer {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

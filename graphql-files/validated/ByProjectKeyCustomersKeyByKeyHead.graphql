@@ -1,0 +1,5 @@
+query {
+  customers(where: "key=\"{key}\"") {
+    exists
+  }
+}
