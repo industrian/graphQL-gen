@@ -108,16 +108,6 @@ function loadOASYaml(filePath) {
 function iterateOAS(oasDocument) {
 
 
-    try {
-        if (fs.existsSync("graphql-files")) {
-            fs.rmSync("graphql-files", { recursive: true, force: true });
-        }
-
-        fs.mkdirSync("graphql-files");
-    } catch (err) {
-        console.error(err);
-    }
-
 
     // Example: Iterate over paths
     if (oasDocument.paths) {
@@ -134,7 +124,13 @@ function iterateOAS(oasDocument) {
 
                     // Do stuff here
 
-                    CreateFile(operation.operationId);
+                    if (operation.operationId.startsWith("ByProjectKeyInStoreKeyByStoreKey")) {
+                        CreateFile(operation.operationId);
+                    }
+
+                    if (operation.operationId.startsWith("ByProjectKeyAsAssociate")) {
+                        CreateFile(operation.operationId);
+                    }
 
                     //console.log(processedId)
 
@@ -159,7 +155,7 @@ function iterateOAS(oasDocument) {
 
 // TODO: Uncomment out this function to process the files again. It is disabled as I'm now doing it manually.
 // Step 3: Call the function with the file path to the OAS YAML
-//loadOASYaml('../commercetools-api-reference/oas/api/openapi.yaml');
+loadOASYaml('../commercetools-api-reference/oas/api/openapi.yaml');
 
 /**
  * 
@@ -178,39 +174,12 @@ function CreateFile(operationId) {
 
         // Special case for getting a Project
         if (processedIds[1] === "Get") {
-            graphqlQuery = `query{
-  project{
-    version
-    key
-    name
-    countries
-    currencies
-    #...
-  }
-`;
+
         }
 
         // Special case for updating a Project
-        if (processedIds[1] === "Post") {
-            graphqlQuery = `mutation{
-  updateProject(
-    version:1
-    actions:[
-      {
-        changeCurrencies:{
-          currencies:["EUR","USD"]
-        }
-      }
-    ]
-  ){
-    version
-    key
-    name
-    countries
-    currencies
-    #...
-  }
-`;
+        if (processedIds[1] === "Post") {          
+
         }
 
         if (processedIds[1].includes("AsAssociate")) {
@@ -233,7 +202,7 @@ function CreateFile(operationId) {
 
                 }
                 else {
-                    graphqlQuery += processStuff(processedIds, false)
+                    //graphqlQuery += processStuff(processedIds, false)
                 }
             }
         }
@@ -275,7 +244,7 @@ function processInStoreStuff(processedIds) {
         }
         else {
             graphqlQuery += `query{
-            inStore(key:"{key}"){
+            inStore(key:"{storeKey}"){
             ${processStuff(inStoreProcessedIds, true)}
             }
             }`
