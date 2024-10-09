@@ -1,0 +1,17 @@
+mutation {
+  createProductDiscount(
+    draft: {
+      value: { absolute: { money: [{ currencyCode: "EUR", centAmount: 100 }] } }
+      predicate: "1=1"
+      name: [{ locale: "en", value: "test-discount1" }]
+      description: [{ locale: "en", value: "test-discount1" }]
+      isActive: false
+      sortOrder: "0.9534"
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

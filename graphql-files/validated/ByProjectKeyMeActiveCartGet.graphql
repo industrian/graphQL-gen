@@ -1,0 +1,10 @@
+query {
+  me {
+    activeCart {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

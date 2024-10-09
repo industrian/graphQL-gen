@@ -1,5 +1,5 @@
 query {
-  productProjectionSearch(locale: "en", text: "blue") {
+  orderEdits {
     offset
     count
     total

@@ -1,0 +1,18 @@
+query {
+  productSelection(id: "{id}") {
+    productRefs {
+      results {
+        productRef {
+          id
+        }
+        variantSelection {
+          type
+          skus
+        }
+        variantExclusion {
+          skus
+        }
+      }
+    }
+  }
+}

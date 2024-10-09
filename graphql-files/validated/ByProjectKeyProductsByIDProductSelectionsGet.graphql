@@ -1,0 +1,13 @@
+query {
+  product(id: "{id}") {
+    productSelectionRefs {
+      results {
+        productSelectionRef {
+          id
+        }
+        createdAt
+        #...
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+query {
+  orders(where: "orderNumber=\"{orderNumber}\"") {
+    exists
+  }
+}

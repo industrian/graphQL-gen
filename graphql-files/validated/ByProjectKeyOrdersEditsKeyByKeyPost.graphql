@@ -1,0 +1,15 @@
+mutation {
+  updateOrderEdit(
+    version: 7
+    key: "{key}"
+    actions: [
+      { setKey: { key: "another-key" } }
+      { addStagedAction: { stagedAction: { setCountry: { country: "ES" } } } }
+    ]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

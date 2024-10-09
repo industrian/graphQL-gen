@@ -1,0 +1,14 @@
+query {
+  me {
+    payments {
+      offset
+      count
+      total
+      results {
+        id
+        version
+        #...
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+query {
+  orderEdits(where: "id=\"{id}\"") {
+    exists
+  }
+}

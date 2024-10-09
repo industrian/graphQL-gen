@@ -1,0 +1,22 @@
+mutation {
+  importOrder(
+    draft: {
+      orderNumber: "100000001"
+      totalPrice: { centAmount: 1000, currencyCode: "EUR" }
+      lineItems: []
+      customLineItems: [
+        {
+          name: [{ locale: "en", value: "My line item" }]
+          slug: "my-line-item"
+          quantity: 1
+          money: { centPrecision: { currencyCode: "EUR", centAmount: 1995 } }
+        }
+      ]
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

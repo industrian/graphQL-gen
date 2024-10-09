@@ -1,0 +1,7 @@
+mutation {
+  deleteOrder(orderNumber: "{orderNumber}", version: 1) {
+    id
+    version
+    #...
+  }
+}

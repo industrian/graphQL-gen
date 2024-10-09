@@ -1,0 +1,8 @@
+query {
+  order(orderNumber: "{orderNumber}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}

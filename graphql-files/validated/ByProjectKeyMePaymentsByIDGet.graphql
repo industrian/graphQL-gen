@@ -1,0 +1,9 @@
+query {
+  me {
+    payment(id: "{id}") {
+      id
+      version
+      #...
+    }
+  }
+}
