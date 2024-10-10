@@ -1,0 +1,13 @@
+query {
+  asAssociate( 
+    businessUnitKey:"{businessUnitKey}" 
+    associateId:"{associateId}"
+  ){
+  quote(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
+  }
+}
+}

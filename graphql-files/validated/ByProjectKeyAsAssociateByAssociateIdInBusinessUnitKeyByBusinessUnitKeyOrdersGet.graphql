@@ -1,0 +1,18 @@
+query {
+  asAssociate( 
+    businessUnitKey:"{businessUnitKey}" 
+    associateId:"{associateId}"
+  ){
+  orders {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}
+}
