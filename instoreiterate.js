@@ -167,10 +167,10 @@ loadOASYaml('../commercetools-api-reference/oas/api/openapi.yaml');
  */
 function CreateFile(operationId) {
 
-    if (operationId.startsWith("ByProjectKeyInStoreKeyByStoreKey")) {
+    if (operationId.startsWith("ByProjectKeyAsAssociate")) {
         console.log(operationId)
 
-        const processedIds = operationId.split("ByProjectKeyInStoreKeyByStoreKey")[1];
+        const processedIds = operationId.split("ByProjectKeyAsAssociate")[1];
 
         let graphqlQuery = "";//processedIds[1].endsWith("Post") ? "mutation {" : "query {";
 

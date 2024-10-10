@@ -1,10 +1,11 @@
 query {
-  inStore(key: "{storeKey}") {
-    cartDiscount(key: "{key}") {
-      id
-      version
-      createdAt
-      #...
-    }
+  inStore(key:"{storeKey}")
+{
+  cartDiscount(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
   }
+}
 }

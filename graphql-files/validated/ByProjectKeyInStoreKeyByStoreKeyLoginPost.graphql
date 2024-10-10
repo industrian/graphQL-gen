@@ -1,0 +1,17 @@
+mutation {
+  customerSignIn(
+    storeKey: "{storeKey}"
+    draft: {
+      email: "johndoe@example.com"
+      password: "secret123"
+      anonymousCart: { id: "{{cart-id}}", typeId: "cart" }
+    }
+  ) {
+    customer {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

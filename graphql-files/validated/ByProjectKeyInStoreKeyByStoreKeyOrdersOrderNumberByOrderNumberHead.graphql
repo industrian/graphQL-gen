@@ -1,0 +1,8 @@
+query {
+  inStore(key:"{storeKey}")
+{
+  orders(where: "orderNumber=\"{orderNumber}\"") {
+    exists
+  }
+}
+}

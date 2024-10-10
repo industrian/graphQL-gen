@@ -1,7 +1,8 @@
 query {
-  inStore(key: "{storeKey}") {
-    stagedQuotes(where: "key=\"{key}\"") {
-      exists
-    }
+  inStore(key:"{storeKey}")
+{
+  stagedQuotes(where: "key=\"{key}\"") {
+    exists
   }
+}
 }

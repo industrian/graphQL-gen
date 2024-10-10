@@ -1,12 +1,13 @@
 query {
-  inStore(key: "storeKey") {
-    me {
-      activeCart {
-        id
-        version
-        createdAt
-        #...
-      }
+  inStore(key:"{storeKey}")
+{
+  me {
+    activeCart {
+      id
+      version
+      createdAt
+      #...
     }
   }
+}
 }

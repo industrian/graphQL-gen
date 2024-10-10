@@ -1,0 +1,13 @@
+query {
+  inStore(key:"{storeKey}")
+{
+  me {
+    shoppingList(key: "{key}") {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}
+}

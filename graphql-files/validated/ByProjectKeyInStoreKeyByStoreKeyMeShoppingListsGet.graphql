@@ -1,0 +1,18 @@
+query {
+  inStore(key:"{storeKey}")
+{
+  me {
+    shoppingLists {
+      offset
+      count
+      total
+      results {
+        id
+        version
+        createdAt
+        #...
+      }
+    }
+  }
+}
+}

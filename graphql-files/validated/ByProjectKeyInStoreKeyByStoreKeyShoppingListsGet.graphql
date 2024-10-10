@@ -1,15 +1,16 @@
 query {
-  inStore(key: "{storeKey}") {
-    shoppingLists {
-      offset
-      count
-      total
-      results {
-        id
-        version
-        createdAt
-        #...
-      }
+  inStore(key:"{storeKey}")
+{
+  shoppingLists {
+    offset
+    count
+    total
+    results {
+      id
+      version
+      createdAt
+      #...
     }
   }
+}
 }

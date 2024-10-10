@@ -1,0 +1,31 @@
+mutation {
+  createShoppingList(
+    storeKey: "{storeKey}"
+    draft: {
+      name: [{ locale: "en", value: "My shopping list" }]
+      slug: [{ locale: "en", value: "my-shopping-list" }]
+      customer: {
+        typeId: "customer"
+        id: "e73cd97f-846e-44a0-b418-3ed044a8e398"
+      }
+      key: "my-shopping-list"
+      deleteDaysAfterLastModification: 100
+      lineItems: [
+        { sku: "product-variant-sku", quantity: 5 }
+        { productId: "0e131f46-8d1a-4761-9c83-b45ab5d3501e", variantId: 2 }
+      ]
+      textLineItems: [
+        {
+          name: [{ locale: "en", value: "My shopping list item" }]
+          description: [{ locale: "en", value: "This is a good gift idea" }]
+          quantity: 5
+        }
+      ]
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

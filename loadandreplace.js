@@ -174,16 +174,16 @@ function CreateFile(operationId) {
         try {
             let graphQLFile = fs.readFileSync(`graphql-files/validated/ByProjectKey${operationId.split("ByProjectKeyInStoreKeyByStoreKey")[1]}.graphql`, 'utf8');
 
-            //console.log(graphQLFile)
+            console.log(graphQLFile)
 
+            /*if (operationId.split("ByProjectKeyInStoreKeyByStoreKey")[1].includes("Post")) {
 
-            if (graphQLFile.includes("version: 1")) {
-                    graphQLFile = graphQLFile.replace("version: 1", `storeKey: "{storeKey}"
-                        version: 1`)
+                if (graphQLFile.includes(") {")) {
+                    graphQLFile = graphQLFile.replace(") {", `, storeKey: "{storeKey}" ) {`)
                     fs.writeFileSync("graphql-files/" + operationId + ".graphql", graphQLFile)
             }
 
-
+            }*/
 
         } catch (e) {
             console.error(e)

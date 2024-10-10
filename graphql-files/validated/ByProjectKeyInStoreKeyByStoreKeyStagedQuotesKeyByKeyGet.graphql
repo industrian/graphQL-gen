@@ -1,10 +1,11 @@
 query {
-  inStore(key: "{storeKey}") {
-    stagedQuote(key: "{key}") {
-      id
-      version
-      createdAt
-      #...
-    }
+  inStore(key:"{storeKey}")
+{
+  stagedQuote(key: "{key}") {
+    id
+    version
+    createdAt
+    #...
   }
+}
 }

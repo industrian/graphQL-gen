@@ -1,0 +1,10 @@
+query {
+  inStore(key:"{storeKey}")
+{
+  me {
+    shoppingLists(where: "id=\"{id}\"") {
+      exists
+    }
+  }
+}
+}
