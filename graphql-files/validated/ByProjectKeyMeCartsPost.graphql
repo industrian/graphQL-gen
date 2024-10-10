@@ -1,0 +1,8 @@
+mutation {
+  createMyCart(draft: { currency: "EUR" }) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

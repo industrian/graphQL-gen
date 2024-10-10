@@ -86,7 +86,7 @@ function validateGraphQLFiles(folderPath) {
             }
         } catch (err) {
             if (err.message.includes('Unexpected Name "impossible"')) {
-                try {
+              /*  try {
                     fs.copyFileSync(graphqlFolder + "/" + file, impossibleFolder + "/" + file);
                     console.log('Impossible function file copied successfully');
 
@@ -94,7 +94,7 @@ function validateGraphQLFiles(folderPath) {
                     console.log('Impossible function file deleted successfully');
                 } catch (err) {
                     console.error('Error copying file:', err);
-                }
+                }*/
             }
         }
     });

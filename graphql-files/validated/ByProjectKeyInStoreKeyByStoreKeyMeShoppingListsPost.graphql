@@ -1,0 +1,26 @@
+mutation {
+  createMyShoppingList(
+    storeKey: "{storeKey}"
+    draft: {
+      name: [{ locale: "en", value: "My shopping list" }]
+      description: [{ locale: "en", value: "Description of my shopping list" }]
+      lineItems: [
+        { sku: "product-variant-sku", quantity: 5 }
+        { productId: "0e131f46-8d1a-4761-9c83-b45ab5d3501e", variantId: 2 }
+      ]
+      textLineItems: [
+        {
+          name: [{ locale: "en", value: "My shopping list item" }]
+          description: [{ locale: "en", value: "This is a good gift idea" }]
+          quantity: 5
+        }
+      ]
+      deleteDaysAfterLastModification: 100
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}
