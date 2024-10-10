@@ -1,0 +1,16 @@
+mutation {
+  updateQuote(
+    asAssociate: {
+      businessUnitKey: "{businessUnitKey}"
+      associateId: "{associateId}"
+    }
+    version: 1
+    key: "{key}"
+    actions: [{ changeQuoteState: { quoteState: Accepted } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

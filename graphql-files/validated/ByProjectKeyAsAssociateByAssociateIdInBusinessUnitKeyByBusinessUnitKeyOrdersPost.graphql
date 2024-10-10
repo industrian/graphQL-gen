@@ -1,0 +1,17 @@
+mutation {
+  createOrderFromCart(
+    asAssociate: {
+      businessUnitKey: "{businessUnitKey}"
+      associateId: "{associateId}"
+    }
+    draft: {
+      cart: { id: "7c2e2694-aefe-43d7-888e-6a99514caaca", typeId: "cart" }
+      version: 10
+    }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

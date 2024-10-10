@@ -1,0 +1,16 @@
+mutation {
+  updateOrder(
+    asAssociate: {
+      businessUnitKey: "{businessUnitKey}"
+      associateId: "{associateId}"
+    }
+    version: 1
+    orderNumber: "{orderNumber}"
+    actions: [{ changeOrderState: { orderState: Complete } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}
