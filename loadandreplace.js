@@ -170,11 +170,32 @@ function CreateFile(operationId) {
     if (operationId.startsWith("ByProjectKeyInStoreKeyByStoreKey")) {
         console.log(operationId)
 
+
+        try {
+            let graphQLFile = fs.readFileSync(`graphql-files/validated/ByProjectKey${operationId.split("ByProjectKeyInStoreKeyByStoreKey")[1]}.graphql`, 'utf8');
+
+            //console.log(graphQLFile)
+
+
+            if (graphQLFile.includes("version: 1")) {
+                    graphQLFile = graphQLFile.replace("version: 1", `storeKey: "{storeKey}"
+                        version: 1`)
+                    fs.writeFileSync("graphql-files/" + operationId + ".graphql", graphQLFile)
+            }
+
+
+
+        } catch (e) {
+            console.error(e)
+            //console.error(`Nothing exists in validated for: ByProjectKey${operationId.split("ByProjectKeyInStoreKeyByStoreKey")[1]}.graphql`)
+        }
+
+
+        /*
+
         const processedIds = operationId.split("ByProjectKeyInStoreKeyByStoreKey")[1];
 
         let graphqlQuery = "";//processedIds[1].endsWith("Post") ? "mutation {" : "query {";
-
-        console.log(processedIds)
 
         // Do not create a query for Checking Project Exists
         if (processedIds[1] != "Head") {
@@ -183,14 +204,13 @@ function CreateFile(operationId) {
 
             fs.writeFileSync("graphql-files/" + operationId + ".graphql", graphqlQuery)
 
-        }
+        }*/
     }
 }
 
 function processInStoreStuff(processedIds) {
     let inStoreProcessedIds = processedIds;
     let graphqlQuery = "";
-    console.log(inStoreProcessedIds)
 
     if (inStoreProcessedIds.startsWith("Me")) {
         // TODO: Me endpoint stuff

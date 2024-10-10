@@ -1,0 +1,13 @@
+mutation {
+  updateQuoteRequest(
+    storeKey: "{storeKey}"
+                        version: 1
+    id: "{id}"
+    actions: [{ changeQuoteRequestState: { quoteRequestState: Cancelled } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}
