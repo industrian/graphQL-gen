@@ -1,0 +1,14 @@
+mutation {
+  deleteCart(
+    asAssociate: {
+      businessUnitKey: "{businessUnitKey}"
+      associateId: "{associateId}"
+    }
+    id: "{id}"
+    version: 1
+  ) {
+    id
+    version
+    #...
+  }
+}

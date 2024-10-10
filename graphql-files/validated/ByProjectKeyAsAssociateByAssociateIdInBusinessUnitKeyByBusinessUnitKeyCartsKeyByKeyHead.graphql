@@ -1,0 +1,10 @@
+query {
+  asAssociate(
+    businessUnitKey: "{businessUnitKey}"
+    associateId: "{associateId}") 
+  {
+  carts(where: "key=\"{key}\"") {
+    exists
+  }
+}
+}

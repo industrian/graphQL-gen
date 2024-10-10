@@ -1,0 +1,10 @@
+query {
+  asAssociate(
+    businessUnitKey: "{businessUnitKey}"
+    associateId: "{associateId}") 
+  {
+  orders(where: "orderNumber=\"{orderNumber}\"") {
+    exists
+  }
+}
+}

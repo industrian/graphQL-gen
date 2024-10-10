@@ -1,0 +1,10 @@
+query {
+  asAssociate(
+    businessUnitKey: "{businessUnitKey}"
+    associateId: "{associateId}") 
+  {
+  quoteRequests(where: "key=\"{key}\"") {
+    exists
+  }
+}
+}

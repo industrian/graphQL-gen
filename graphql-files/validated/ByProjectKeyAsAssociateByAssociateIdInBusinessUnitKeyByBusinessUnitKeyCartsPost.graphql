@@ -1,0 +1,14 @@
+mutation {
+  createCart(
+    asAssociate: {
+      businessUnitKey: "{businessUnitKey}"
+      associateId: "{associateId}"
+    }
+    draft: { currency: "EUR" }
+  ) {
+    id
+    version
+    createdAt
+    #...
+  }
+}
