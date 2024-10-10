@@ -1,0 +1,12 @@
+mutation {
+  updateMyQuoteRequest(
+    version: 1
+    id: "{id}"
+    actions: [{ cancelQuoteRequest: { dummy: "" } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

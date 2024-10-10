@@ -179,10 +179,10 @@ function CreateFile(operationId) {
             if (operationId.split("ByProjectKeyMe")[1].includes("Post")) {
 
                 if (graphQLFile.includes(`mutation {
-  create`)) {
+  update`)) {
                     graphQLFile = graphQLFile.replace(`mutation {
-  create`, `mutation {
-  createMy`)
+  update`, `mutation {
+  updateMy`)
                     //graphQLFile += "}"
                     fs.writeFileSync("graphql-files/" + operationId + ".graphql", graphQLFile)
             }

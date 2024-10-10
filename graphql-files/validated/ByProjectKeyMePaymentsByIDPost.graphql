@@ -1,0 +1,17 @@
+mutation {
+  updateMyPayment(
+    version: 1
+    id: "{id}"
+    actions: [
+      {
+        changeAmountPlanned: {
+          amount: { currencyCode: "USD", centAmount: 1000 }
+        }
+      }
+    ]
+  ) {
+    id
+    version
+    #...
+  }
+}

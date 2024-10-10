@@ -1,0 +1,12 @@
+mutation {
+  updateMyQuote(
+    version: 1
+    id: "{id}"
+    actions: [{ changeMyQuoteState: { quoteState: Accepted } }]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}

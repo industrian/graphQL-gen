@@ -1,0 +1,24 @@
+mutation {
+  updateMyBusinessUnit(
+    version: 3
+    id: "{id}"
+    actions: [
+      {
+        addAddress: {
+          address: {
+            streetName: "Any Street"
+            streetNumber: "1337"
+            postalCode: "11111"
+            city: "Any City"
+            country: "US"
+          }
+        }
+      }
+    ]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}
