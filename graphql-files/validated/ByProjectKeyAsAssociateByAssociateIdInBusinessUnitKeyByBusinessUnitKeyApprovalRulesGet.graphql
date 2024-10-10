@@ -1,0 +1,17 @@
+query {
+  asAssociate(
+    businessUnitKey: "{businessUnitKey}"
+    associateId: "{associateId}"
+  ) {
+    approvalRules {
+      offset
+      count
+      total
+      results {
+        id
+        createdAt
+        #...
+      }
+    }
+  }
+}

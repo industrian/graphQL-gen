@@ -1,0 +1,15 @@
+mutation {
+  updateApprovalFlow(
+    id: "{id}"
+    asAssociate: {
+      businessUnitKey: "{businessUnitKey}"
+      associateId: "{associateId}"
+    }
+    version: 1
+    actions: [{ reject: { reason: "Out of policy" } }]
+  ) {
+    id
+    createdAt
+    #...
+  }
+}

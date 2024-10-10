@@ -1,0 +1,16 @@
+mutation {
+  updateApprovalRule(
+    asAssociate: {
+      businessUnitKey: "{businessUnitKey}"
+      associateId: "{associateId}"
+    }
+    version: 1
+    id: "{id}"
+    actions: [{ setStatus: { status: Active } }]
+  ) {
+    id
+    version
+    status
+    #...
+  }
+}

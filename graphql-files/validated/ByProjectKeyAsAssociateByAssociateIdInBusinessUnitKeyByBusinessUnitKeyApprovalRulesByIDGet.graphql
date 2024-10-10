@@ -1,0 +1,12 @@
+query {
+  asAssociate(
+    businessUnitKey: "{businessUnitKey}"
+    associateId: "{associateId}"
+  ) {
+    approvalRule(id: "{id}") {
+      id
+      createdAt
+      #...
+    }
+  }
+}
