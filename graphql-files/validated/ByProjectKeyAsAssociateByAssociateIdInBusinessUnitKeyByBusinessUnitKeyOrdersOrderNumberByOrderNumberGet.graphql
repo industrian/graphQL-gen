@@ -1,13 +1,13 @@
 query {
-  asAssociate( 
-    businessUnitKey:"{businessUnitKey}" 
-    associateId:"{associateId}"
-  ){
-  order(orderNumber: "{orderNumber}") {
-    id
-    version
-    createdAt
-    #...
+  asAssociate(
+    businessUnitKey: "{businessUnitKey}"
+    associateId: "{associateId}"
+  ) {
+    order(orderNumber: "{orderNumber}") {
+      id
+      version
+      createdAt
+      #...
+    }
   }
-}
 }

@@ -1,6 +1,6 @@
 mutation {
   updateMyCart(
-    storeKey:"{storeKey}"
+    storeKey: "{storeKey}"
     version: 1
     id: "{id}"
     actions: [

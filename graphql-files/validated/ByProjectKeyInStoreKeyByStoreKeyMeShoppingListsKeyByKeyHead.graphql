@@ -1,10 +1,9 @@
 query {
-  inStore(key:"{storeKey}")
-{
-  me {
-    shoppingLists(where: "key=\"{key}\"") {
-      exists
+  inStore(key: "{storeKey}") {
+    me {
+      shoppingLists(where: "key=\"{key}\"") {
+        exists
+      }
     }
   }
-}
 }

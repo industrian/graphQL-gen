@@ -1,8 +1,7 @@
 query {
-  inStore(key:"{storeKey}")
-{
-  customers(where: "key=\"{key}\"") {
-    exists
+  inStore(key: "{storeKey}") {
+    customers(where: "key=\"{key}\"") {
+      exists
+    }
   }
-}
 }

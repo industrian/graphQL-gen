@@ -1,16 +1,15 @@
 query {
-  inStore(key:"{storeKey}")
-{
-  stagedQuotes {
-    offset
-    count
-    total
-    results {
-      id
-      version
-      createdAt
-      #...
+  inStore(key: "{storeKey}") {
+    stagedQuotes {
+      offset
+      count
+      total
+      results {
+        id
+        version
+        createdAt
+        #...
+      }
     }
   }
-}
 }

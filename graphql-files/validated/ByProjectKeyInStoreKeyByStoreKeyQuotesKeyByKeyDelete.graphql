@@ -1,6 +1,5 @@
 mutation {
-  deleteQuote(key: "{key}", storeKey: "{storeKey}"
-                        version: 1) {
+  deleteQuote(key: "{key}", storeKey: "{storeKey}", version: 1) {
     id
     version
     #...

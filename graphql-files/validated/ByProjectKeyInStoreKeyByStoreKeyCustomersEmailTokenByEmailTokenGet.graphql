@@ -1,11 +1,10 @@
 query {
-  inStore(key:"{storeKey}")
-{
-  customer(emailToken: "{emailToken}") {
-    id
-    version
-    createdAt
-    #...
+  inStore(key: "{storeKey}") {
+    customer(emailToken: "{emailToken}") {
+      id
+      version
+      createdAt
+      #...
+    }
   }
-}
 }

@@ -1,6 +1,5 @@
 mutation {
-  deleteStagedQuote(key: "{key}", storeKey: "{storeKey}"
-                        version: 1) {
+  deleteStagedQuote(key: "{key}", storeKey: "{storeKey}", version: 1) {
     id
     version
     #...

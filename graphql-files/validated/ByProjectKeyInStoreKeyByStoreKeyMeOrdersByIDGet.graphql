@@ -1,13 +1,12 @@
 query {
-  inStore(key:"{storeKey}")
-{
-  me {
-    order(id: "{id}") {
-      id
-      version
-      createdAt
-      #...
+  inStore(key: "{storeKey}") {
+    me {
+      order(id: "{id}") {
+        id
+        version
+        createdAt
+        #...
+      }
     }
   }
-}
 }

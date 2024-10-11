@@ -1,7 +1,7 @@
 query {
-  me{
-  quotes(where: "id=\"{id}\"") {
-    exists
+  me {
+    quotes(where: "id=\"{id}\"") {
+      exists
+    }
   }
-}
 }

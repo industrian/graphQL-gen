@@ -1,6 +1,5 @@
 mutation {
-  deleteCustomer(key: "{key}", storeKey: "{storeKey}"
-                        version: 1) {
+  deleteCustomer(key: "{key}", storeKey: "{storeKey}", version: 1) {
     id
     version
     #...

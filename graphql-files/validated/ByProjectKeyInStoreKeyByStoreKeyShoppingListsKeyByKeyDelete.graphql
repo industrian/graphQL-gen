@@ -1,6 +1,5 @@
 mutation {
-  deleteShoppingList(key: "{key}", storeKey: "{storeKey}"
-                        version: 1) {
+  deleteShoppingList(key: "{key}", storeKey: "{storeKey}", version: 1) {
     id
     version
     #...

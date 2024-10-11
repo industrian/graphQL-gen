@@ -1,18 +1,17 @@
 query {
-  inStore(key:"{storeKey}")
-{
-  me {
-    orders {
-      offset
-      count
-      total
-      results {
-        id
-        version
-        createdAt
-        #...
+  inStore(key: "{storeKey}") {
+    me {
+      orders {
+        offset
+        count
+        total
+        results {
+          id
+          version
+          createdAt
+          #...
+        }
       }
     }
   }
-}
 }

@@ -1,16 +1,15 @@
 query {
-  inStore(key:"{storeKey}")
-{
-  productTailoringList {
-    offset
-    count
-    total
-    results {
-      id
-      version
-      createdAt
-      #...
+  inStore(key: "{storeKey}") {
+    productTailoringList {
+      offset
+      count
+      total
+      results {
+        id
+        version
+        createdAt
+        #...
+      }
     }
   }
-}
 }

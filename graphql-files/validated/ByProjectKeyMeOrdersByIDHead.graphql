@@ -1,7 +1,7 @@
 query {
-  me{
-  orders(where: "id=\"{id}\"") {
-    exists
+  me {
+    orders(where: "id=\"{id}\"") {
+      exists
+    }
   }
-}
 }

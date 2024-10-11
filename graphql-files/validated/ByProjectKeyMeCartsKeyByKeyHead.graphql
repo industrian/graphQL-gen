@@ -1,7 +1,7 @@
 query {
-  me{
-  carts(where: "key=\"{key}\"") {
-    exists
+  me {
+    carts(where: "key=\"{key}\"") {
+      exists
+    }
   }
-}
 }

@@ -1,11 +1,10 @@
 query {
-  inStore(key:"{storeKey}")
-{
-  quoteRequest(key: "{key}") {
-    id
-    version
-    createdAt
-    #...
+  inStore(key: "{storeKey}") {
+    quoteRequest(key: "{key}") {
+      id
+      version
+      createdAt
+      #...
+    }
   }
-}
 }

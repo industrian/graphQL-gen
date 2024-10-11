@@ -1,11 +1,10 @@
 query {
-  inStore(key:"{storeKey}")
-{
-  shippingMethodsByCart(id: "{cartId}") {
-    id
-    version
-    createdAt
-    #...
+  inStore(key: "{storeKey}") {
+    shippingMethodsByCart(id: "{cartId}") {
+      id
+      version
+      createdAt
+      #...
+    }
   }
-}
 }

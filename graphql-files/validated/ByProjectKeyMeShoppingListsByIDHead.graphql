@@ -1,7 +1,7 @@
 query {
-  me{
-  shoppingLists(where: "id=\"{id}\"") {
-    exists
+  me {
+    shoppingLists(where: "id=\"{id}\"") {
+      exists
+    }
   }
-}
 }

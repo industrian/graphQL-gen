@@ -1,6 +1,5 @@
 mutation {
-  deleteCartDiscount(key: "{key}", storeKey: "{storeKey}"
-                        version: 1) {
+  deleteCartDiscount(key: "{key}", storeKey: "{storeKey}", version: 1) {
     id
     version
     #...
