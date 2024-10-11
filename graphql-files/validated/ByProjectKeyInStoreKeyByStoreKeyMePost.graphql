@@ -1,17 +1,22 @@
 mutation {
-  customerSignMeUp(
-    storeKey: "{storeKey}"
-    draft: {
-      email: "johndoe@example.com"
-      firstName: "John"
-      lastName: "Doe"
-      password: "secret123"
-    }
+  updateMyCustomer(
+    version: 3
+    actions: [
+      {
+        addAddress: {
+          address: {
+            streetName: "Any Street"
+            streetNumber: "1337"
+            postalCode: "11111"
+            city: "Any City"
+            country: "US"
+          }
+        }
+      }
+    ]
   ) {
-    customer {
-      id
-      version
-      #...
-    }
+    id
+    version
+    #...
   }
 }

@@ -1,0 +1,7 @@
+mutation {
+  deleteMyCustomer(version: 1) {
+    id
+    version
+    #...
+  }
+}
