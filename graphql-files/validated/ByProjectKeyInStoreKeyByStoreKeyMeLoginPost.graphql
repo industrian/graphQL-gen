@@ -1,0 +1,13 @@
+mutation {
+  customerSignMeIn(
+    storeKey: "{storeKey}"
+    draft: { email: "johndoe@example.com", password: "secret123" }
+  ) {
+    customer {
+      id
+      version
+      createdAt
+      #...
+    }
+  }
+}

@@ -1,7 +1,5 @@
 mutation {
-  customerConfirmMyEmail(
-    tokenValue: "hI_6fkuFIyd_wadz1JmpRGh1vMvgFrlsSJia3G6d"
-  ) {
+  customerConfirmEmail(tokenValue: "hI_6fkuFIyd_wadz1JmpRGh1vMvgFrlsSJia3G6d") {
     id
     version
     createdAt
