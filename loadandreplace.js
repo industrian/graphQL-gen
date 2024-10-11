@@ -167,21 +167,20 @@ loadOASYaml('../commercetools-api-reference/oas/api/openapi.yaml');
  */
 function CreateFile(operationId) {
 
-    if (operationId.startsWith("ByProjectKeyMe")) {
+    if (operationId.startsWith("ByProjectKeyInStoreKeyByStoreKeyMe")) {
         console.log(operationId)
 
-        if (!operationId.includes("Message")) {
         try {
-            let graphQLFile = fs.readFileSync(`graphql-files/validated/ByProjectKey${operationId.split("ByProjectKeyMe")[1]}.graphql`, 'utf8');
+            let graphQLFile = fs.readFileSync(`graphql-files/validated/ByProjectKeyMe${operationId.split("ByProjectKeyInStoreKeyByStoreKeyMe")[1]}.graphql`, 'utf8');
 
             console.log(graphQLFile)
 
-            if (operationId.split("ByProjectKeyMe")[1].includes("Head")) {
+            if (operationId.split("ByProjectKeyInStoreKeyByStoreKeyMe")[1].includes("Post")) {
 
-                if (graphQLFile.includes(`query {`)) {
-                    graphQLFile = graphQLFile.replace(`query {`, `query {
-  me{`)
-                    graphQLFile += "}"
+                if (graphQLFile.includes(`version: 1`)) {
+                    graphQLFile = graphQLFile.replace(`version: 1`, `storeKey:"{storeKey}"
+    version: 1`)
+                //graphQLFile += "}"
                     fs.writeFileSync("graphql-files/" + operationId + ".graphql", graphQLFile)
             }
 
@@ -191,7 +190,7 @@ function CreateFile(operationId) {
             console.error(e)
             //console.error(`Nothing exists in validated for: ByProjectKey${operationId.split("ByProjectKeyInStoreKeyByStoreKey")[1]}.graphql`)
         }
-        }
+
 
 
         /*

@@ -1,0 +1,7 @@
+mutation {
+  deleteMyShoppingList(key: "{key}", version: 1, storeKey: "{storeKey}") {
+    id
+    version
+    #...
+  }
+}

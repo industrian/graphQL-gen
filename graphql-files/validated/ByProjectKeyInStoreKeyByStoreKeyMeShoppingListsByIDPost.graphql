@@ -1,6 +1,6 @@
 mutation {
-  updateShoppingList(
-    storeKey: "{storeKey}"
+  updateMyShoppingList(
+    storeKey:"{storeKey}"
     version: 1
     id: "{id}"
     actions: [{ changeName: { name: [{ locale: "en", value: "New Name" }] } }]

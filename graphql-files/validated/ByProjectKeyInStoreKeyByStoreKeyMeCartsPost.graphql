@@ -1,0 +1,8 @@
+mutation {
+  createMyCart(storeKey: "{storeKey}", draft: { currency: "EUR" }) {
+    id
+    version
+    createdAt
+    #...
+  }
+}

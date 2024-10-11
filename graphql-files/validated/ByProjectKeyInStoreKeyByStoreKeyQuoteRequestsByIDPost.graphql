@@ -1,7 +1,7 @@
 mutation {
   updateQuoteRequest(
     storeKey: "{storeKey}"
-                        version: 1
+    version: 1
     id: "{id}"
     actions: [{ changeQuoteRequestState: { quoteRequestState: Cancelled } }]
   ) {
