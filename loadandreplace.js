@@ -176,13 +176,13 @@ function CreateFile(operationId) {
 
             console.log(graphQLFile)
 
-            if (operationId.split("ByProjectKeyMe")[1].includes("Post")) {
+            if (operationId.split("ByProjectKeyMe")[1].includes("Delete")) {
 
                 if (graphQLFile.includes(`mutation {
-  update`)) {
+  delete`)) {
                     graphQLFile = graphQLFile.replace(`mutation {
-  update`, `mutation {
-  updateMy`)
+  delete`, `mutation {
+  deleteMy`)
                     //graphQLFile += "}"
                     fs.writeFileSync("graphql-files/" + operationId + ".graphql", graphQLFile)
             }

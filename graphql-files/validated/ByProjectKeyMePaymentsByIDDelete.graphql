@@ -1,0 +1,7 @@
+mutation {
+  deleteMyPayment(id: "{id}", version: 1) {
+    id
+    version
+    #...
+  }
+}
