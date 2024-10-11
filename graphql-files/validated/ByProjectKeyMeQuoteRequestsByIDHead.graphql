@@ -1,7 +1,7 @@
 query {
-  me {
-    quoteRequests(where: "id=\"{id}\"") {
-      exists
-    }
+  me{
+  quoteRequests(where: "id=\"{id}\"") {
+    exists
   }
+}
 }
