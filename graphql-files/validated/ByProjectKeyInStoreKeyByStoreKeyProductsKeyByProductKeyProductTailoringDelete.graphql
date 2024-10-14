@@ -1,0 +1,11 @@
+mutation {
+  deleteProductTailoring(
+    version: 2
+    storeKey: "{storeKey}"
+    productKey: "{productKey}"
+  ) {
+    id
+    version
+    #...
+  }
+}

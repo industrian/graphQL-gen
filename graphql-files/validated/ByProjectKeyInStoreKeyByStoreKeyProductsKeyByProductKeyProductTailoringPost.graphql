@@ -1,0 +1,20 @@
+mutation {
+  updateProductTailoring(
+    version: 1
+    storeKey: "{storeKey}"
+    productKey: "{productKey}"
+    actions: [
+      {
+        setDescription: {
+          description: [{ locale: "en", value: "Description" }]
+          staged: true
+        }
+      }
+    ]
+  ) {
+    id
+    version
+    lastModifiedAt
+    #...
+  }
+}
